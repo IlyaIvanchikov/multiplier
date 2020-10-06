@@ -1,45 +1,34 @@
-import {
-  caseAnyOrWithout10,
-  caseWith10,
-  caseWith5,
-} from './orderedMakeFuctions';
+import getRandomIntInclusive from './extraFunctions/getRandomIntInclusive';
 
-export const makeExercises = (digits: number, terms: number, orders: any) => {
-  let arrOfTerms: number[] = [];
+const minMax = (digit: number) => ({
+  max: Math.pow(10, digit) - 1,
+  min: digit === 1 ? 2 : Math.pow(10, digit - 1),
+});
 
-  const n = orders.ten[0];
-  if (orders.five.length > 0) {
-    // законы на 5 (любой или особые)
-    if (orders.five[0] === 'Любой') {
-      // выбран любой закон на 5
-      n === 'Любой' || n === undefined
-        ? caseAnyOrWithout10(digits, terms, orders, arrOfTerms)
-        : caseWith10(digits, terms, orders, arrOfTerms);
-    } else {
-      // особые законы на 5
-      n === 'Любой' || n === undefined
-        ? caseWith5(digits, terms, orders, arrOfTerms)
-        : caseWith10(digits, terms, orders, arrOfTerms);
-    }
-  } else {
-    // без законов на 5
-    caseWith5(digits, terms, orders, arrOfTerms);
+const computeFunc = {
+  multiply: (a: number, b: number) => a * b,
+  divide: (a: number, b: number) => a / b,
+  pow: (a: number) => a ** 2,
+  sqrt: (a: number) => Math.sqrt(a),
+};
 
-    switch (n) {
-      case 'Любой':
-        // orderSrt = 'without5';
-        break;
-      case undefined:
-        // orderSrt = 'withoutAnyOrders';
-        break;
-
-      default:
-        // orderSrt = 'with10without5';
-        break;
-    }
+export const makeExercises = (
+  digits: number,
+  actions: number,
+  compute: string
+) => {
+  const { min, max } = minMax(digits);
+  let arrOfExc: any[] = [];
+  for (let i = 0; i < actions; i++) {
+    const excercise: number[] = [];
+    excercise.push(getRandomIntInclusive(min, max));
+    if (compute !== 'pow' && compute !== 'sqrt')
+      excercise.push(getRandomIntInclusive(min, max));
+      if (compute === 'divide') excercise.sort().reverse()
+    // считаем ответ
+    excercise.push(+computeFunc[compute](...excercise).toFixed(2));
+    arrOfExc.push(excercise);
   }
-  // считаем сумму и пушим в массив
-  arrOfTerms.push(arrOfTerms.reduce((a, b) => a + b, 0));
 
-  return arrOfTerms;
+  return arrOfExc;
 };
