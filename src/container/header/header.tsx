@@ -17,7 +17,7 @@ const Header: React.FC = () => (
       </Col>
       <Col className="flex-row justify-content-center align-items-center d-none d-md-flex">
         <img src={arrow} alt="arrow" />
-        <h1>Форсаж</h1>
+        <h1>Умножайка</h1>
       </Col>
       <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
         <a href="https://pifagoriyatsk.ru/forsage/">

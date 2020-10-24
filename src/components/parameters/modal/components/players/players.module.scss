@@ -1,9 +1,0 @@
-@import '../../../../../styleGuide/variable.scss';
-
-.btn {
-  @include btn__InModal;
-
-  &__img {
-    margin-right: 3%;
-  }
-}

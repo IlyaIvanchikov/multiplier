@@ -10,11 +10,6 @@ export const ParametersContext = React.createContext<{
 
 export const UsuallyContext = React.createContext<UsuallyProps>({
   handleShowSubmit: () => {},
-  handleCountPlayersClick: () => {},
-  countPlayers: {
-    countPlayers: 1,
-    nameButton: '1 игрок',
-  },
 });
 
 export const DispatchParametersContext = React.createContext<{
