@@ -64,7 +64,7 @@ const ParametersView = ({
         <Operation handleButtonClick={setValueSelectOperation} />
       </ModalComponent>
       <FormRange
-        title="Первое число(разряд):"
+        title="Первое число (разряд):"
         min={1}
         max={6}
         step={1}
@@ -72,7 +72,7 @@ const ParametersView = ({
         setValueRange={setValueRangeFirstNumbers}
       />
       <FormRange
-        title="Второе число(разряд):"
+        title="Второе число (разряд):"
         min={1}
         max={6}
         step={1}
@@ -80,8 +80,8 @@ const ParametersView = ({
         setValueRange={setValueRangeSecondNumbers}
       />
       <FormRange
-        title="Количество рандов:"
-        min={10}
+        title="Количество раундов:"
+        min={1}
         max={40}
         step={1}
         currentParametersRange={countGames}

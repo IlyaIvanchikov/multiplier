@@ -26,6 +26,7 @@ export const initialState: StateType = {
 export const reducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
     case 'CREATE_PARAMETERS': {
+      state.gamesParameters = action.gamesParameters;
       return state;
     }
     default:

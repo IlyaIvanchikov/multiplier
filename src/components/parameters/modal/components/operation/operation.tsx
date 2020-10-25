@@ -6,7 +6,7 @@ import { ButtonID } from '../../../../../ts/store';
 const nameButton: string[] = [
   'Умножение',
   'Деление с остатком',
-  'Деление без остатком',
+  'Деление без остатка',
   'Квадрат числа',
   'Корень квадратный',
 ];
@@ -21,6 +21,7 @@ export const Operation = ({ handleButtonClick }: ButtonID) => {
               key={index}
               className={classes.btn}
               onClick={() => handleButtonClick(item)}
+              disabled={index >= 3 ? true : false}
             >
               {item}
             </Button>

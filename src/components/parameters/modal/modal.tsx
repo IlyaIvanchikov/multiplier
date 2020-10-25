@@ -47,14 +47,6 @@ const ModalComponent = ({
             >
               Выбрать
             </Button>
-            {title === 'Законы' ? null : (
-              <Button
-                className={classes.footer__btn}
-                onClick={handleCloseModalClick}
-              >
-                Отмена
-              </Button>
-            )}
           </Modal.Footer>
         )}
       </Modal>
