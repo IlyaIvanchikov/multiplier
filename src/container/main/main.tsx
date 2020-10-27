@@ -22,7 +22,6 @@ const Main: React.FC = () => {
     operation,
   }: HandleParamsForm) => {
     event.preventDefault();
-    console.log(countGames, firstNumber, secondNumber, operation);
     setLoading(true);
     dispatch({
       type: 'CREATE_PARAMETERS',
