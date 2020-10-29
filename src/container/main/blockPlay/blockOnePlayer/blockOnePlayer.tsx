@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import { StateTypeItem } from '../../state/reducer';
 import BlockGame from './blockGame/blockGame';
 import BlockResults from './blockResults/blockResults';
-import { generateNumber } from '../../../../components/exercisesLogic/generateNumber';
+import { makeExercises } from '../../../../components/exercisesLogic/makeExercises';
 
 const BlockOnePlayer = ({
   countGames,
@@ -20,9 +20,7 @@ const BlockOnePlayer = ({
     roundsScore: [],
   });
 
-  const exercises: any = [];
-
-  generateNumber(exercises, countGames, firstNumber, secondNumber, operation);
+  const exercises = makeExercises(firstNumber, secondNumber, countGames, operation);
 
   const [newExercises, setNewExercises] = useState(exercises)
 
@@ -49,6 +47,7 @@ const BlockOnePlayer = ({
             results={results}
             round={round}
             setRound={setRound}
+            operation={operation}
         />
       }
     </Col>
