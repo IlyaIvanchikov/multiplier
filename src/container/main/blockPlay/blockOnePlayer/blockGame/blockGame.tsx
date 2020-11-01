@@ -83,8 +83,9 @@ const BlockGame = ({
       });
       rez.gameOver = 1;
       setTimeout(() => {
+        console.log('Go to results')
         setResults(rez);
-        showScore(true);
+        // showScore(true);
       }, 2000);
     }
     setAnswerText('');
@@ -121,7 +122,7 @@ const BlockGame = ({
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
         <BlockTerm
           timing={timing}
-          numOfTerms={exercises[round].length - 1}
+          numOfTerms={exercises[0].length - 1}
           term={term}
         />
       </Row>
