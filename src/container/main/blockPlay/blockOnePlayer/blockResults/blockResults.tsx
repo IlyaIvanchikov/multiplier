@@ -68,9 +68,6 @@ const BlockResults = ({
           </button>
         </Col>
       </Row>
-      <Row className={classes.resultsSubTitle}>
-        <h6>Игрок 1</h6>
-      </Row>
       <Row className={classes.visualResults}>
         <span>Правильно:</span>
         <Col className={classes.visualResultsPogress}>

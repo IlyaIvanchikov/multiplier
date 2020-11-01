@@ -85,7 +85,7 @@ const BlockGame = ({
       setTimeout(() => {
         console.log('Go to results')
         setResults(rez);
-        // showScore(true);
+        showScore(true);
       }, 2000);
     }
     setAnswerText('');
