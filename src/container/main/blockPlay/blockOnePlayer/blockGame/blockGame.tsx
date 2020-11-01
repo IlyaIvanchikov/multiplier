@@ -12,7 +12,7 @@ import ArrowIcon from '../../../../../resources/images/Arrow.png'
 type blockGameOpt = {
   exercises: any[];
   setNewExercises: any;
-  countGames: number;
+  numOfRounds: number;
   showScore: any;
   setResults: any;
   results: any;
@@ -25,7 +25,7 @@ type blockGameOpt = {
 const BlockGame = ({
   exercises,
   setNewExercises,
-  countGames,
+  numOfRounds,
   showScore,
   setResults,
   results,
@@ -33,30 +33,74 @@ const BlockGame = ({
   setRound,
   operation
 }: blockGameOpt) => {
-    console.log(
-      exercises,
-      countGames,
-      showScore,
-      setResults,
-      results,
-      round,
-      setRound
-  )
+  console.log('ReZ' ,results)
 
-  const timing = 1000
+  const timing = 2000
   const [term, setTerm] = useState([0, exercises[round - 1][0]]);
+  const numOfTerms = exercises[0].length;
+  const delayTermApear = 200;
+  const [disableInput, setDisableInput] = useState(true);
+  const [answerText, setAnswerText] = useState('');
+  let rez: any;
   const [resultOfExercise, setResultOfExercise] = useState({
     isRightAnswer: true,
     isRoundComplete: false,
     isShow: false,
   })
 
+  const handleTextField = (event: any) => {
+    setAnswerText(event.target.value);
+  };
+
+  const handleSendAnswer = (event: any) => {
+    rez = results
+    event.preventDefault()
+
+    const isRightAnswer = +answerText === +exercises[round - 1][numOfTerms - 1] ? true : false
+    if (isRightAnswer) rez.rightAnswers++
+
+    if (!rez.roundsScore[round - 1])
+      rez.roundsScore.push({ exercise: exercises[round - 1], answer: 0 });
+    if (round < numOfRounds) {
+      rez.roundsScore[round - 1].answer = +answerText;
+      setResultOfExercise({
+        isRightAnswer,
+        isRoundComplete: false,
+        isShow: true,
+      });
+      setTimeout(() => {
+        setRound(round + 1);
+        setTerm([0, exercises[round][0]]);
+        // setCurrentNumber(-1);
+        // setIsRealNumber(true);
+      }, 3000);
+    } else {
+      rez.roundsScore[round - 1].answer = +answerText;
+      setResultOfExercise({
+        isRightAnswer,
+        isRoundComplete: true,
+        isShow: true,
+      });
+      rez.gameOver = 1;
+      setTimeout(() => {
+        setResults(rez);
+        showScore(true);
+      }, 2000);
+    }
+    setAnswerText('');
+    setDisableInput(true);
+  }
+
   useEffect(() => {
-    setTimeout(() => {
-      setRound(round + 1)
-      setTerm([0, exercises[round][0]])
-    }, 3000);
-  }, [round])
+    if (term[0] < numOfTerms - 1) {
+      setTimeout(() => {
+        setTerm([term[0] + 1, exercises[round - 1][term[0] + 1]]);
+      }, timing + delayTermApear - 50);
+    } else if (term[0] !== 100) {
+      setTerm([100, '???']);
+      setDisableInput(false);
+    }
+  }, [round, term])
 
   useEffect(() => {
     if (resultOfExercise.isShow && !results.gameOver) {
@@ -70,8 +114,6 @@ const BlockGame = ({
     }
   }, [resultOfExercise]);
 
-
-
   return (
     <>
       <BlockPlayerHeader compute={operation} />
@@ -79,24 +121,23 @@ const BlockGame = ({
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
         <BlockTerm
           timing={timing}
-          numOfTerms={countGames - 1}
+          numOfTerms={exercises[round].length - 1}
           term={term}
         />
       </Row>
-      <Row className={classes.gameCounter}>{`${round}/${countGames}`}</Row>
+      <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
       <Row className={classes.blockAnswer}>
-        <form id="answerForm" onSubmit={() => alert('Send Form')}>
+        <form id="answerForm" onSubmit={handleSendAnswer}>
           <input
-            onChange={() => alert('Change Form')}
-            style={ {backgroundColor: 'lightgrey'} }
-            // disabled={disableInput}
+            onChange={handleTextField}
+            style={disableInput ? { backgroundColor: 'lightgrey' } : {}}
+            disabled={disableInput}
             required={true}
-            value={'answerText'}
             placeholder="Ответ:"
+            value={answerText}
             type="number"
-            // ref={answerRef}
           />
-          <button type="submit">
+          <button type="submit" disabled={disableInput}>
             <img src={ArrowIcon} alt="arrow" />
           </button>
         </form>

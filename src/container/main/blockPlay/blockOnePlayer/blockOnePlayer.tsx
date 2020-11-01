@@ -41,7 +41,7 @@ const BlockOnePlayer = ({
         <BlockGame
             exercises={newExercises}
             setNewExercises={setNewExercises}
-            countGames={countGames}
+            numOfRounds={countGames}
             showScore={setViewScore}
             setResults={setResults}
             results={results}
