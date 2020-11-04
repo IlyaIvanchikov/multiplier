@@ -52,6 +52,7 @@ export interface UsuallyProps {
     secondNumber,
     operation,
   }: HandleParamsForm) => void;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ButtonID {

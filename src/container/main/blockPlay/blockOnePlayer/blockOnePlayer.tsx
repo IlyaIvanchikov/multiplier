@@ -22,7 +22,7 @@ const BlockOnePlayer = ({
 
   const exercises = makeExercises(firstNumber, secondNumber, countGames, operation);
 
-  const [newExercises, setNewExercises] = useState(exercises)
+  const [newExercises, setNewExercises] = useState(exercises);
 
   return (
     <Col className={classes.onePlayerField}>
@@ -37,8 +37,8 @@ const BlockOnePlayer = ({
             round={round}
             exercises={exercises}
           />
-        ) : 
-        <BlockGame
+        ) :
+          <BlockGame
             exercises={newExercises}
             setNewExercises={setNewExercises}
             numOfRounds={countGames}
@@ -48,7 +48,7 @@ const BlockOnePlayer = ({
             round={round}
             setRound={setRound}
             operation={operation}
-        />
+          />
       }
     </Col>
   );

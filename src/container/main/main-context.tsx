@@ -9,11 +9,12 @@ export const ParametersContext = React.createContext<{
 });
 
 export const UsuallyContext = React.createContext<UsuallyProps>({
-  handleShowSubmit: () => {},
+  handleShowSubmit: () => { },
+  setShow: () => { },
 });
 
 export const DispatchParametersContext = React.createContext<{
   dispatch: (action: ActionType) => void;
 }>({
-  dispatch: () => {},
+  dispatch: () => { },
 });

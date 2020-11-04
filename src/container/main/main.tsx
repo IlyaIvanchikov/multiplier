@@ -53,6 +53,7 @@ const Main: React.FC = () => {
         <UsuallyContext.Provider
           value={{
             handleShowSubmit,
+            setShow,
           }}
         >
           <MainView show={show} loading={isLoading} />

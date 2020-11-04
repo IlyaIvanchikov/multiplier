@@ -12,9 +12,9 @@ type showBlockPlay = {
 const MainView = ({ show, loading }: showBlockPlay) => {
   return (
     <main className={classes.main}>
-      {!show && <BlockParameters />}
+      {show && <BlockParameters />}
       {!show && loading && <Loader />}
-      {show && !loading && <BlockPlay />}
+      {!show && !loading && <BlockPlay />}
     </main>
   );
 };
