@@ -4,7 +4,7 @@ import BlockPlayerHeader from './blockPlayerHeader/blockPlayerHeader'
 import classes from './blockgame.module.scss'
 import BlockAnswerIndicate from './blockAnswerIndicate'
 import { Row } from 'react-bootstrap'
-import BlockTerm from './blockTerm'
+// import BlockTerm from './blockTerm'
 import CoinsIcon from '../../../../../resources/images/Coins.png'
 import ArrowIcon from '../../../../../resources/images/Arrow.png'
 
@@ -35,11 +35,11 @@ const BlockGame = ({
 }: blockGameOpt) => {
   console.log('ReZ' ,results)
 
-  const timing = 2000
-  const [term, setTerm] = useState([0, exercises[round - 1][0]]);
+  // const timing = 2000
+  // const [term, setTerm] = useState([0, exercises[round - 1][0]]);
   const numOfTerms = exercises[0].length;
-  const delayTermApear = 200;
-  const [disableInput, setDisableInput] = useState(true);
+  // const delayTermApear = 200;
+  // const [disableInput, setDisableInput] = useState(true);
   const [answerText, setAnswerText] = useState('');
   let rez: any;
   const [resultOfExercise, setResultOfExercise] = useState({
@@ -56,7 +56,9 @@ const BlockGame = ({
     rez = results
     event.preventDefault()
 
-    const isRightAnswer = +answerText === +exercises[round - 1][numOfTerms - 1] ? true : false
+    const isRightAnswer = +answerText === +exercises[round - 1][numOfTerms - 1]
+      ? true
+      : false
     if (isRightAnswer) rez.rightAnswers++
 
     if (!rez.roundsScore[round - 1])
@@ -70,9 +72,6 @@ const BlockGame = ({
       });
       setTimeout(() => {
         setRound(round + 1);
-        setTerm([0, exercises[round][0]]);
-        // setCurrentNumber(-1);
-        // setIsRealNumber(true);
       }, 3000);
     } else {
       rez.roundsScore[round - 1].answer = +answerText;
@@ -83,25 +82,24 @@ const BlockGame = ({
       });
       rez.gameOver = 1;
       setTimeout(() => {
-        console.log('Go to results')
         setResults(rez);
         showScore(true);
       }, 2000);
     }
     setAnswerText('');
-    setDisableInput(true);
+    // setDisableInput(true);
   }
 
-  useEffect(() => {
-    if (term[0] < numOfTerms - 1) {
-      setTimeout(() => {
-        setTerm([term[0] + 1, exercises[round - 1][term[0] + 1]]);
-      }, timing + delayTermApear - 50);
-    } else if (term[0] !== 100) {
-      setTerm([100, '???']);
-      setDisableInput(false);
-    }
-  }, [round, term])
+  // useEffect(() => {
+  //   if (term[0] < numOfTerms - 1) {
+  //     setTimeout(() => {
+  //       setTerm([term[0] + 1, exercises[round - 1][term[0] + 1]]);
+  //     }, timing + delayTermApear - 50);
+  //   } else if (term[0] !== 100) {
+  //     setTerm([100, '???']);
+  //     // setDisableInput(false);
+  //   }
+  // }, [round, term])
 
   useEffect(() => {
     if (resultOfExercise.isShow && !results.gameOver) {
@@ -120,25 +118,26 @@ const BlockGame = ({
       <BlockPlayerHeader compute={operation} />
       <Row className={classes.gamefieldDisplayNumbers}>
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
-        <BlockTerm
-          timing={timing}
-          numOfTerms={exercises[0].length - 1}
-          term={term}
-        />
+        <p>{exercises[round-1][0]}</p>
+        {exercises[round - 1].length > 2 && <hr />}
+        {exercises[round - 1].length > 2 && <p>{exercises[round-1][1]}</p>}
       </Row>
       <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
       <Row className={classes.blockAnswer}>
         <form id="answerForm" onSubmit={handleSendAnswer}>
           <input
             onChange={handleTextField}
-            style={disableInput ? { backgroundColor: 'lightgrey' } : {}}
-            disabled={disableInput}
+            // style={disableInput ? { backgroundColor: 'lightgrey' } : {}}
+            // disabled={disableInput}
             required={true}
             placeholder="Ответ:"
             value={answerText}
             type="number"
           />
-          <button type="submit" disabled={disableInput}>
+          <button
+            type="submit"
+            // disabled={disableInput}
+            >
             <img src={ArrowIcon} alt="arrow" />
           </button>
         </form>

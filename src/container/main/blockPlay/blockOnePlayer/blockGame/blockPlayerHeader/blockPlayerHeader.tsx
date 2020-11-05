@@ -18,10 +18,10 @@ const BlockPlayerHeader = ({
   return (
     <Row className={classes.playerHeader}>
       <Col className={classes.threePoints}>
-        <button onClick={() => setShow(true)}>
+        <button title="В главное меню"  onClick={() => setShow(true)}>
           <img
             className={classes.resultsIcon}
-            alt="В главное меню"
+            alt="main menu"
             src={ReturnIcon}
           />
         </button>

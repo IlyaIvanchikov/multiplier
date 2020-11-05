@@ -5,12 +5,14 @@
   margin: 0;
   justify-content: center;
   color: #5bc2dc;
+  display: block;
 
   p {
-    @include adaptive-font(120, 90);
+    @include adaptive-font(70, 40);
     margin: 0;
     padding: 10px 0;
-    line-height: 130%;
+    line-height: 100%;
+    text-align: center;
   }
 
   .turboP {

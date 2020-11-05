@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 // import classes from './blockgame.module.scss';
 
 type blockTermOpt = {
@@ -15,30 +15,33 @@ const BlockTerm = ({
   
 }: blockTermOpt) => {
 
-  const [style, setStyle] = useState({
-    opacity: '1',
-  });
+  // const [style, setStyle] = useState({
+  //   opacity: '1',
+  // });
 
-  const delayTermApear = 200;
+  // const delayTermApear = 200;
 
-  useEffect(() => {
-    if (term[0] < numOfTerms) {
-      setTimeout(() => {
-        setStyle({
-          opacity: '0',
-        });
-      }, timing);
-      setTimeout(() => {
-        setStyle({
-          opacity: '1',
-        });
-      }, timing + delayTermApear);
-    }
-  }, [term, numOfTerms, timing, delayTermApear]);
+  // useEffect(() => {
+  //   if (term[0] < numOfTerms) {
+  //     setTimeout(() => {
+  //       setStyle({
+  //         opacity: '0',
+  //       });
+  //     }, timing);
+  //     setTimeout(() => {
+  //       setStyle({
+  //         opacity: '1',
+  //       });
+  //     }, timing + delayTermApear);
+  //   }
+  // }, [term, numOfTerms, timing, delayTermApear]);
 
   return (
     <>
-        <p style={style}>{term[1]}</p>
+        {/* <p style={style}>{term[1]}</p> */}
+        <p>232136</p>
+        <hr />
+        <p>236547</p>
     </>
   );
 };
