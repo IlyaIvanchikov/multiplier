@@ -33,7 +33,6 @@ const BlockGame = ({
   setRound,
   operation
 }: blockGameOpt) => {
-  console.log('ReZ' ,results)
 
   // const timing = 2000
   // const [term, setTerm] = useState([0, exercises[round - 1][0]]);
@@ -47,6 +46,10 @@ const BlockGame = ({
     isRoundComplete: false,
     isShow: false,
   })
+
+  const isFloatResult = operation === 'Деление без остатка' || operation === 'Квадрат числа'
+    ? true
+    : false
 
   const handleTextField = (event: any) => {
     setAnswerText(event.target.value);
@@ -127,6 +130,7 @@ const BlockGame = ({
         <form id="answerForm" onSubmit={handleSendAnswer}>
           <input
             onChange={handleTextField}
+            step={isFloatResult ? 0.01 : 1}
             // style={disableInput ? { backgroundColor: 'lightgrey' } : {}}
             // disabled={disableInput}
             required={true}
