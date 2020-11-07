@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
 import BlockPlayerHeader from './blockPlayerHeader/blockPlayerHeader';
 import classes from './blockgame.module.scss';
@@ -29,6 +29,7 @@ const BlockGame = ({
   setRound,
   operation,
 }: blockGameOpt) => {
+  const answerRef = useRef<HTMLInputElement | null>(null);
   const numOfTerms = exercises[0].length;
   const [answerText, setAnswerText] = useState('');
   let rez: any;
@@ -96,11 +97,17 @@ const BlockGame = ({
         });
       }, 3000);
     }
-  }, [resultOfExercise]);
+  }, [resultOfExercise, results]);
 
+  // Делает фокус на input
+  useEffect(() => {
+    if (typeof round === 'number') {
+      answerRef.current?.focus();
+    }
+  });
   return (
     <>
-      <BlockPlayerHeader compute={operation} />
+      <BlockPlayerHeader compute={operation} showScore={showScore} />
       <Row className={classes.gamefieldDisplayNumbers}>
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
         <p>{exercises[round - 1][0]}</p>
@@ -117,6 +124,7 @@ const BlockGame = ({
             placeholder="Ответ:"
             value={answerText}
             type="number"
+            ref={answerRef}
           />
           <button type="submit">
             <img src={ArrowIcon} alt="arrow" />

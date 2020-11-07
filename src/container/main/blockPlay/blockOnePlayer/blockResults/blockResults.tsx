@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './blockresults.module.scss';
 import { Col, Row } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import TableOfPlayerResults from './tableOfPlayerResults/tableOfPlayerResults';
 import CloseIcon from '../../../../../resources/images/Close.png';
 import ReturnIcon from '../../../../../resources/images/return.svg';
+import { UsuallyContext } from '../../../main-context';
+import { UsuallyProps } from '../../../../../ts/store';
 
 type BlockResProps = {
   showScore: any;
@@ -25,6 +27,7 @@ const BlockResults = ({
   setExercises,
   exercises,
 }: BlockResProps) => {
+  const { setShow }: UsuallyProps = useContext(UsuallyContext);
   const gameScorePercent = (results.rightAnswers / results.countGames) * 100;
   return (
     <Col className={classes.resultsBlock}>
@@ -34,15 +37,13 @@ const BlockResults = ({
           <h5>Результаты</h5>
         </Col>
         <Col className={classes.right}>
-          <a href="/">
-            <button>
-              <img
-                className={classes.resultsIcon}
-                alt="В главное меню"
-                src={ReturnIcon}
-              />
-            </button>
-          </a>
+          <button title="В главное меню" onClick={() => setShow(true)}>
+            <img
+              className={classes.resultsIcon}
+              alt="main menu"
+              src={ReturnIcon}
+            />
+          </button>
           <button
             title="Закрыть"
             onClick={() => {

@@ -8,9 +8,10 @@ import { UsuallyProps } from '../../../../../../ts/store';
 
 type blockGameHeaderOpt = {
   compute: string;
+  showScore: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BlockPlayerHeader = ({ compute }: blockGameHeaderOpt) => {
+const BlockPlayerHeader = ({ compute, showScore }: blockGameHeaderOpt) => {
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
   return (
     <Row className={classes.playerHeader}>
@@ -25,7 +26,7 @@ const BlockPlayerHeader = ({ compute }: blockGameHeaderOpt) => {
       </Col>
       <Col className={classes.playerTitle}>{compute}</Col>
       <Col className={classes.iconBlock}>
-        <button title="Статистика" onClick={() => alert('OK')}>
+        <button title="Статистика" onClick={() => showScore(true)}>
           <img
             className={classes.resultsIcon}
             alt="Results"
