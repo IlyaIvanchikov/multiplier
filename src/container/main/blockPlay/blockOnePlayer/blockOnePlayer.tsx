@@ -5,7 +5,7 @@ import { StateTypeItem } from '../../state/reducer';
 import BlockGame from './blockGame/blockGame';
 import BlockResults from './blockResults/blockResults';
 import { makeExercises } from '../../../../components/exercisesLogic/makeExercises';
-
+import cat from '../../../../resources/images/cat.gif';
 const BlockOnePlayer = ({
   countGames,
   firstNumber,
@@ -30,31 +30,39 @@ const BlockOnePlayer = ({
   const [newExercises, setNewExercises] = useState(exercises);
 
   return (
-    <Col className={classes.onePlayerField}>
-      {viewScore ? (
-        <BlockResults
-          results={results}
-          setResults={setResults}
-          showScore={setViewScore}
-          setExercises={setNewExercises}
-          setRound={setRound}
-          round={round}
-          exercises={exercises}
-        />
-      ) : (
-        <BlockGame
-          exercises={newExercises}
-          setNewExercises={setNewExercises}
-          numOfRounds={countGames}
-          showScore={setViewScore}
-          setResults={setResults}
-          results={results}
-          round={round}
-          setRound={setRound}
-          operation={operation}
-        />
+    <>
+      {countGames === results.rightAnswers && (
+        <Col lg={5} className="d-none d-lg-block">
+          <img src={cat} alt="cat" />
+        </Col>
       )}
-    </Col>
+
+      <Col className={classes.onePlayerField}>
+        {viewScore ? (
+          <BlockResults
+            results={results}
+            setResults={setResults}
+            showScore={setViewScore}
+            setExercises={setNewExercises}
+            setRound={setRound}
+            round={round}
+            exercises={exercises}
+          />
+        ) : (
+          <BlockGame
+            exercises={newExercises}
+            setNewExercises={setNewExercises}
+            numOfRounds={countGames}
+            showScore={setViewScore}
+            setResults={setResults}
+            results={results}
+            round={round}
+            setRound={setRound}
+            operation={operation}
+          />
+        )}
+      </Col>
+    </>
   );
 };
 
