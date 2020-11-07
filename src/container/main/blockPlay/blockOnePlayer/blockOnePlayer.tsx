@@ -20,36 +20,40 @@ const BlockOnePlayer = ({
     roundsScore: [],
   });
 
-  const exercises = makeExercises(firstNumber, secondNumber, countGames, operation);
+  const exercises = makeExercises(
+    firstNumber,
+    secondNumber,
+    countGames,
+    operation
+  );
 
   const [newExercises, setNewExercises] = useState(exercises);
 
   return (
     <Col className={classes.onePlayerField}>
-      {
-        viewScore ? (
-          <BlockResults
-            results={results}
-            setResults={setResults}
-            showScore={setViewScore}
-            setExercises={setNewExercises}
-            setRound={setRound}
-            round={round}
-            exercises={exercises}
-          />
-        ) :
-          <BlockGame
-            exercises={newExercises}
-            setNewExercises={setNewExercises}
-            numOfRounds={countGames}
-            showScore={setViewScore}
-            setResults={setResults}
-            results={results}
-            round={round}
-            setRound={setRound}
-            operation={operation}
-          />
-      }
+      {viewScore ? (
+        <BlockResults
+          results={results}
+          setResults={setResults}
+          showScore={setViewScore}
+          setExercises={setNewExercises}
+          setRound={setRound}
+          round={round}
+          exercises={exercises}
+        />
+      ) : (
+        <BlockGame
+          exercises={newExercises}
+          setNewExercises={setNewExercises}
+          numOfRounds={countGames}
+          showScore={setViewScore}
+          setResults={setResults}
+          results={results}
+          round={round}
+          setRound={setRound}
+          operation={operation}
+        />
+      )}
     </Col>
   );
 };

@@ -7,18 +7,15 @@ import { UsuallyContext } from '../../../../main-context';
 import { UsuallyProps } from '../../../../../../ts/store';
 
 type blockGameHeaderOpt = {
-  compute: string
+  compute: string;
 };
 
-const BlockPlayerHeader = ({
-  compute
-}: blockGameHeaderOpt) => {
-
+const BlockPlayerHeader = ({ compute }: blockGameHeaderOpt) => {
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
   return (
     <Row className={classes.playerHeader}>
       <Col className={classes.threePoints}>
-        <button title="В главное меню"  onClick={() => setShow(true)}>
+        <button title="В главное меню" onClick={() => setShow(true)}>
           <img
             className={classes.resultsIcon}
             alt="main menu"
