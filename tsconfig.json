@@ -18,6 +18,7 @@
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
+    "moduleResolution": "node",
     "noImplicitThis": true,
     "noImplicitAny": true,
     "importHelpers": true,

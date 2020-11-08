@@ -7,7 +7,6 @@ import CloseIcon from '../../../../../resources/images/Close.png';
 import ReturnIcon from '../../../../../resources/images/return.svg';
 import { UsuallyContext } from '../../../main-context';
 import { UsuallyProps } from '../../../../../ts/store';
-import soundVictory from '../../../../../resources/sounds/victory.mp3';
 
 type BlockResProps = {
   showScore: any;
@@ -38,7 +37,7 @@ const BlockResults = ({
 
   return (
     <>
-      <audio src={soundVictory} autoPlay={playAudio} />
+      <audio src="./assets/victory.mp3" autoPlay={playAudio} />
       <Col className={classes.resultsBlock}>
         <Row className={classes.resultsHeader}>
           <Col className={classes.left} />
