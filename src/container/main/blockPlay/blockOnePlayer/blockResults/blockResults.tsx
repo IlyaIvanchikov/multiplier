@@ -7,6 +7,7 @@ import CloseIcon from '../../../../../resources/images/Close.png';
 import ReturnIcon from '../../../../../resources/images/return.svg';
 import { UsuallyContext } from '../../../main-context';
 import { UsuallyProps } from '../../../../../ts/store';
+import soundVictory from '../../../../../resources/sounds/victory.mp3';
 
 type BlockResProps = {
   showScore: any;
@@ -29,61 +30,70 @@ const BlockResults = ({
 }: BlockResProps) => {
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
   const gameScorePercent = (results.rightAnswers / results.countGames) * 100;
+  let playAudio: boolean = false;
+
+  if (results.countGames === results.rightAnswers) {
+    playAudio = true;
+  }
+
   return (
-    <Col className={classes.resultsBlock}>
-      <Row className={classes.resultsHeader}>
-        <Col className={classes.left} />
-        <Col className={classes.resultsTitle}>
-          <h5>Результаты</h5>
-        </Col>
-        <Col className={classes.right}>
-          <button title="В главное меню" onClick={() => setShow(true)}>
-            <img
-              className={classes.resultsIcon}
-              alt="main menu"
-              src={ReturnIcon}
-            />
-          </button>
-          <button
-            title="Закрыть"
-            onClick={() => {
-              if (results.gameOver) {
-                setResults({
-                  countGames: results.countGames,
-                  rightAnswers: 0,
-                  roundsScore: [],
-                });
-                setRound(1);
-                setExercises(exercises);
-              } else {
-                setRound(round);
-              }
-              showScore(false);
-            }}
-          >
-            <img
-              className={classes.resultsIcon}
-              alt="Закрыть"
-              src={CloseIcon}
-            />
-          </button>
-        </Col>
-      </Row>
-      <Row className={classes.visualResults}>
-        <span>Правильно:</span>
-        <Col className={classes.visualResultsPogress}>
-          <p className={classes.relResult}>
-            {`${results.rightAnswers} из ${results.countGames} `}
-          </p>
-          <ProgressBar now={gameScorePercent} />
-        </Col>
-      </Row>
-      <Row>
-        <Col className={classes.tableOfResults}>
-          <TableOfPlayerResults results={results.roundsScore} />
-        </Col>
-      </Row>
-    </Col>
+    <>
+      <audio src={soundVictory} autoPlay={playAudio} />
+      <Col className={classes.resultsBlock}>
+        <Row className={classes.resultsHeader}>
+          <Col className={classes.left} />
+          <Col className={classes.resultsTitle}>
+            <h5>Результаты</h5>
+          </Col>
+          <Col className={classes.right}>
+            <button title="В главное меню" onClick={() => setShow(true)}>
+              <img
+                className={classes.resultsIcon}
+                alt="main menu"
+                src={ReturnIcon}
+              />
+            </button>
+            <button
+              title="Закрыть"
+              onClick={() => {
+                if (results.gameOver) {
+                  setResults({
+                    countGames: results.countGames,
+                    rightAnswers: 0,
+                    roundsScore: [],
+                  });
+                  setRound(1);
+                  setExercises(exercises);
+                } else {
+                  setRound(round);
+                }
+                showScore(false);
+              }}
+            >
+              <img
+                className={classes.resultsIcon}
+                alt="Закрыть"
+                src={CloseIcon}
+              />
+            </button>
+          </Col>
+        </Row>
+        <Row className={classes.visualResults}>
+          <span>Правильно:</span>
+          <Col className={classes.visualResultsPogress}>
+            <p className={classes.relResult}>
+              {`${results.rightAnswers} из ${results.countGames} `}
+            </p>
+            <ProgressBar now={gameScorePercent} />
+          </Col>
+        </Row>
+        <Row>
+          <Col className={classes.tableOfResults}>
+            <TableOfPlayerResults results={results.roundsScore} />
+          </Col>
+        </Row>
+      </Col>
+    </>
   );
 };
 

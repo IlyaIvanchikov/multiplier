@@ -6,7 +6,6 @@ import {
   UsuallyContext,
 } from './main-context';
 import MainView from './main.view';
-
 import { HandleParamsForm } from '../../ts/store';
 
 const Main: React.FC = () => {

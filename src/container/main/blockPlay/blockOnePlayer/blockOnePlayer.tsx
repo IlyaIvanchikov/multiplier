@@ -6,6 +6,7 @@ import BlockGame from './blockGame/blockGame';
 import BlockResults from './blockResults/blockResults';
 import { makeExercises } from '../../../../components/exercisesLogic/makeExercises';
 import cat from '../../../../resources/images/cat.gif';
+
 const BlockOnePlayer = ({
   countGames,
   firstNumber,
@@ -49,18 +50,18 @@ const BlockOnePlayer = ({
             exercises={exercises}
           />
         ) : (
-          <BlockGame
-            exercises={newExercises}
-            setNewExercises={setNewExercises}
-            numOfRounds={countGames}
-            showScore={setViewScore}
-            setResults={setResults}
-            results={results}
-            round={round}
-            setRound={setRound}
-            operation={operation}
-          />
-        )}
+            <BlockGame
+              exercises={newExercises}
+              setNewExercises={setNewExercises}
+              numOfRounds={countGames}
+              showScore={setViewScore}
+              setResults={setResults}
+              results={results}
+              round={round}
+              setRound={setRound}
+              operation={operation}
+            />
+          )}
       </Col>
     </>
   );
