@@ -6,7 +6,8 @@ import FormRange from './formRange/formRange';
 import ModalComponent from './modal/modal';
 import { Operation } from './modal/components/operation/operation';
 import { SubmitFormView } from '../../ts/store';
-
+import soundOn from '../../resources/images/soundSVG/soundOn.png';
+import soundOff from '../../resources/images/soundSVG/soundOff.png';
 interface EventHandlerProps extends SubmitFormView {
   showOperation: boolean;
   handleModalOperationClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -27,6 +28,8 @@ const ParametersView = ({
   firstNumber,
   secondNumber,
   operation,
+  isSound,
+  setCheckIsSound,
   setValueRangeFirstNumbers,
   setValueRangeSecondNumbers,
   setValueRangeCountGames,
@@ -43,6 +46,7 @@ const ParametersView = ({
           firstNumber,
           secondNumber,
           operation,
+          isSound,
         })
       }
     >
@@ -88,14 +92,21 @@ const ParametersView = ({
         setValueRange={setValueRangeCountGames}
       />
       <Form.Group as={Row} controlId="formPlaintextButton" className="mb-1">
-        <Col
-          sm="7"
-          className="d-flex align-items-center justify-content-center"
-        />
-        <Col
-          sm="5"
-          className="d-flex align-items-center justify-content-center"
-        >
+        <Col sm="7"
+          className="d-flex align-items-center justify-content-start">
+          <button title="звук мелодий" className={classes.buttonIcon} onClick={(event) => {
+            event.preventDefault();
+            setCheckIsSound(!isSound)
+          }}>
+            <img
+              className={classes.resultsIcon}
+              alt="звук"
+              src={isSound ? soundOn : soundOff}
+            />
+          </button>
+        </Col>
+        <Col sm="5"
+          className="d-flex align-items-center justify-content-center">
           <Button
             type="submit"
             className={classes.formControlButton}
@@ -110,7 +121,7 @@ const ParametersView = ({
           </Button>
         </Col>
       </Form.Group>
-    </Form>
+    </Form >
   );
 };
 

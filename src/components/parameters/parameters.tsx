@@ -9,6 +9,7 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
     firstNumber,
     secondNumber,
     operation,
+    isSound,
   }: StateTypeItem = gamesParameters;
   const [showOperation, setShowOperation] = useState<boolean>(false);
 
@@ -16,7 +17,7 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
   const [valueRangeFirstNumbers, setValueRangeFirstNumbers] = useState<number>(firstNumber);
   const [valueRangeSecondNumber, setValueRangeSecondNumbers] = useState<number>(secondNumber);
   const [valueSelectOperation, setValueSelectOperation] = useState<string>(operation);
-
+  const [checkIsSound, setCheckIsSound] = useState<boolean>(isSound);
   const handleModalOperationClick = () => {
     setShowOperation(true);
   };
@@ -35,6 +36,8 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
       secondNumber={valueRangeSecondNumber}
       setValueRangeSecondNumbers={setValueRangeSecondNumbers}
       operation={valueSelectOperation}
+      isSound={checkIsSound}
+      setCheckIsSound={setCheckIsSound}
       setValueSelectOperation={setValueSelectOperation}
       showOperation={showOperation}
       handleModalOperationClick={handleModalOperationClick}

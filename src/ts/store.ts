@@ -22,6 +22,7 @@ export interface HandleParamsForm {
   firstNumber: number;
   secondNumber: number;
   operation: string;
+  isSound: boolean;
 }
 export interface HandleSubmitForm {
   handleSubmit: ({
@@ -30,6 +31,7 @@ export interface HandleSubmitForm {
     firstNumber,
     secondNumber,
     operation,
+    isSound,
   }: HandleParamsForm) => void;
 }
 
@@ -38,10 +40,12 @@ export interface SubmitFormView extends HandleSubmitForm {
   firstNumber: number;
   secondNumber: number;
   operation: string;
+  isSound: boolean;
   setValueRangeFirstNumbers: React.Dispatch<React.SetStateAction<number>>;
   setValueRangeSecondNumbers: React.Dispatch<React.SetStateAction<number>>;
   setValueRangeCountGames: React.Dispatch<React.SetStateAction<number>>;
   setValueSelectOperation: React.Dispatch<React.SetStateAction<string>>;
+  setCheckIsSound: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface UsuallyProps {
@@ -51,6 +55,7 @@ export interface UsuallyProps {
     firstNumber,
     secondNumber,
     operation,
+    isSound,
   }: HandleParamsForm) => void;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }

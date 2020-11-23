@@ -11,6 +11,7 @@ const BlockPlay = () => {
     firstNumber,
     secondNumber,
     operation,
+    isSound,
   } = state.gamesParameters;
   return (
     <>
@@ -20,6 +21,7 @@ const BlockPlay = () => {
           firstNumber={firstNumber}
           secondNumber={secondNumber}
           operation={operation}
+          isSound={isSound}
         />
       </Row>
     </>

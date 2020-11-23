@@ -19,6 +19,7 @@ const Main: React.FC = () => {
     firstNumber,
     secondNumber,
     operation,
+    isSound,
   }: HandleParamsForm) => {
     event.preventDefault();
     setLoading(true);
@@ -29,6 +30,7 @@ const Main: React.FC = () => {
         firstNumber,
         secondNumber,
         operation,
+        isSound,
       },
     });
     setShow(false);

@@ -7,6 +7,7 @@ export interface StateTypeItem {
   firstNumber: number;
   secondNumber: number;
   operation: string;
+  isSound: boolean;
 }
 
 export type ActionType = {
@@ -20,6 +21,7 @@ export const initialState: StateType = {
     firstNumber: 1,
     secondNumber: 1,
     operation: 'Умножение',
+    isSound: false,
   },
 };
 

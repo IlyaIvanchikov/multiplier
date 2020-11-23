@@ -13,6 +13,15 @@
   border-radius: 25px;
   color: white;
 
+  .buttonIcon {
+    background: none;
+    border: none;
+    .resultsIcon {
+      width: 35px;
+      color: none;
+    }
+  }
+
   h2 {
     @include adaptive-font(38, 20);
   }
