@@ -40,7 +40,7 @@ const BlockGame = ({
   });
 
   const isFloatResult =
-    operation === 'Деление без остатка' || operation === 'Квадрат числа'
+    operation === 'Дробное деление' || operation === 'Квадрат числа'
       ? true
       : false;
 
