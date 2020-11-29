@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './blockgame.module.scss';
 import imageRight from '../../../../../resources/images/owl_right.png';
 import imageWrong from '../../../../../resources/images/owl_wrong.png';
-const soundRight = require('../../../../../resources/sounds/4-dog-shows-ducks.mp3');
-const soundWrong = require('../../../../../resources/sounds/7-you-failed.mp3');
+import { ParametersContext } from '../../../main-context';
+import soundRight from '../../../../../resources/sounds/4-dog-shows-ducks.mp3';
+import soundWrong from '../../../../../resources/sounds/7-you-failed.mp3';
 
 type indicateProps = {
   resultOfExercise: any;
 };
 
 const BlockAnswerIndicate = ({ resultOfExercise }: indicateProps) => {
+  const { state } = useContext(ParametersContext);
+  const { isSound } = state.gamesParameters;
   // resultOfExercise.isShow = 1
   const text = {
     rightAnswer: ['Так держать!', 'Продолжай в том же духе!'],
@@ -43,7 +46,7 @@ const BlockAnswerIndicate = ({ resultOfExercise }: indicateProps) => {
             ? text.rightAnswer[1]
             : text.wrongAnswer[1]}
         </p>
-        {resultOfExercise.isShow && (
+        {resultOfExercise.isShow && isSound && (
           <audio
             src={resultOfExercise.isRightAnswer ? soundRight : soundWrong}
             autoPlay={true}

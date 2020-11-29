@@ -92,12 +92,18 @@ const ParametersView = ({
         setValueRange={setValueRangeCountGames}
       />
       <Form.Group as={Row} controlId="formPlaintextButton" className="mb-1">
-        <Col sm="7"
-          className="d-flex align-items-center justify-content-start">
-          <button title="звук мелодий" className={classes.buttonIcon} onClick={(event) => {
-            event.preventDefault();
-            setCheckIsSound(!isSound)
-          }}>
+        <Col
+          sm="7"
+          className="d-flex align-items-center justify-content-start"
+        >
+          <button
+            title="Отключение звука"
+            className={classes.buttonIcon}
+            onClick={(event) => {
+              event.preventDefault();
+              setCheckIsSound(!isSound);
+            }}
+          >
             <img
               className={classes.resultsIcon}
               alt="звук"
@@ -105,8 +111,10 @@ const ParametersView = ({
             />
           </button>
         </Col>
-        <Col sm="5"
-          className="d-flex align-items-center justify-content-center">
+        <Col
+          sm="5"
+          className="d-flex align-items-center justify-content-center"
+        >
           <Button
             type="submit"
             className={classes.formControlButton}
@@ -121,7 +129,7 @@ const ParametersView = ({
           </Button>
         </Col>
       </Form.Group>
-    </Form >
+    </Form>
   );
 };
 

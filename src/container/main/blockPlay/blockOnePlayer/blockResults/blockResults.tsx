@@ -5,7 +5,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import TableOfPlayerResults from './tableOfPlayerResults/tableOfPlayerResults';
 import CloseIcon from '../../../../../resources/images/Close.png';
 import ReturnIcon from '../../../../../resources/images/return.svg';
-import { UsuallyContext } from '../../../main-context';
+import { UsuallyContext, ParametersContext } from '../../../main-context';
 import { UsuallyProps } from '../../../../../ts/store';
 
 type BlockResProps = {
@@ -30,8 +30,10 @@ const BlockResults = ({
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
   const gameScorePercent = (results.rightAnswers / results.countGames) * 100;
   let playAudio: boolean = false;
+  const { state } = useContext(ParametersContext);
+  const { isSound } = state.gamesParameters;
 
-  if (results.countGames === results.rightAnswers) {
+  if (results.countGames === results.rightAnswers && isSound) {
     playAudio = true;
   }
 
