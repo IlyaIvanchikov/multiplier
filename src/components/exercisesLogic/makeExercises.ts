@@ -19,7 +19,6 @@ export const makeExercises = (
   actions: number,
   compute: string
 ) => {
-  console.log(compute);
   const { min: minA, max: maxA } = minMax(digitsOne);
   const { min: minB, max: maxB } = minMax(digitsTwo);
   const arrOfExc: any[] = [];
@@ -29,11 +28,15 @@ export const makeExercises = (
     if (compute !== 'Квадрат числа' && compute !== 'Корень квадратный') {
       excercise.push(getRandomIntInclusive(minB, maxB));
     }
-
     if (compute === 'Простое деление') {
       excercise = excercise.sort((a, b) => b - a);
-      if (excercise[0] % excercise[1] !== 0) {
-        excercise[0] = excercise[0] - (excercise[0] % excercise[1]);
+      while (
+        excercise[0] % excercise[1] !== 0 ||
+        excercise[0] === excercise[1]
+      ) {
+        excercise[0] = getRandomIntInclusive(minA, maxA);
+        excercise[1] = getRandomIntInclusive(minB, maxB);
+        excercise = excercise.sort((a, b) => b - a);
       }
     }
     // считаем ответ
