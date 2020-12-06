@@ -89,7 +89,7 @@ const BlockResults = ({
             <ProgressBar now={gameScorePercent} />
           </Col>
         </Row>
-        <Row>
+        <Row style={{ height: '60%'}}>
           <Col className={classes.tableOfResults}>
             <TableOfPlayerResults results={results.roundsScore} />
           </Col>
