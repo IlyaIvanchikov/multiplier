@@ -105,13 +105,23 @@ const BlockGame = ({
       answerRef.current?.focus();
     }
   });
+  const computeSings = {
+    'Умножение': 'x',
+    'Простое деление': '÷',
+    'Дробное деление': '÷',
+    'Квадрат числа': 'в квадрате',
+    'Корень квадратный': 'квадратный корень',
+  };
+  const OprationSign = () => (
+    <Row className={classes.operationSign}>{computeSings[operation]}</Row>
+  );
   return (
     <>
       <BlockPlayerHeader compute={operation} showScore={showScore} />
       <Row className={classes.gamefieldDisplayNumbers}>
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
         <p>{exercises[round - 1][0]}</p>
-        {exercises[round - 1].length > 2 && <hr />}
+        {exercises[round - 1].length > 2 && <OprationSign />}
         {exercises[round - 1].length > 2 && <p>{exercises[round - 1][1]}</p>}
       </Row>
       <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
