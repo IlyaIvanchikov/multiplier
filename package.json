@@ -1,17 +1,17 @@
 {
-  "name": "forsage",
+  "name": "multiplier",
   "version": "0.1.0",
   "private": true,
   "description": "pifagoria project",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IlyaIvanchikov/forsage.git"
+    "url": "git+https://github.com/IlyaIvanchikov/multiplier.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IlyaIvanchikov/forsage/issues"
+    "url": "https://github.com/IlyaIvanchikov/multiplier/issues"
   },
   "homepage": "https://sattvalife.ru/build/",
   "dependencies": {
