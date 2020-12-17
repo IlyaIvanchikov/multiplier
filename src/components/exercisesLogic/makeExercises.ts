@@ -38,6 +38,11 @@ export const makeExercises = (
         excercise[1] = getRandomIntInclusive(minB, maxB);
         excercise = excercise.sort((a, b) => b - a);
       }
+    } else if (compute === 'Дробное деление') {
+      while (excercise[0] % excercise[1] === 0) {
+        excercise[0] = getRandomIntInclusive(minA, maxA);
+        excercise[1] = getRandomIntInclusive(minB, maxB);
+      }
     }
     // считаем ответ
     excercise.push(+computeFunc[compute](...excercise).toFixed(2));
