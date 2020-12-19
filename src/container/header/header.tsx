@@ -10,7 +10,7 @@ const Header: React.FC = () => (
     <Row className={classes.row}>
       <Col className="flex-row justify-content-start align-items-center d-none d-sm-flex">
         <div className={classes.logo}>
-          <a href="https://pifagoriyatsk.ru/forsage/">
+          <a href="https://pifagoriyatsk.ru/multiplier/">
             <img src={logo} alt="logo" />
           </a>
         </div>
