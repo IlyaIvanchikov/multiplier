@@ -1,45 +1,53 @@
-import {
-  caseAnyOrWithout10,
-  caseWith10,
-  caseWith5,
-} from './orderedMakeFuctions';
+import getRandomIntInclusive from './extraFunctions/getRandomIntInclusive';
 
-export const makeExercises = (digits: number, terms: number, orders: any) => {
-  let arrOfTerms: number[] = [];
+const minMax = (digit: number) => ({
+  max: Math.pow(10, digit) - 1,
+  min: digit === 1 ? 2 : Math.pow(10, digit - 1),
+});
 
-  const n = orders.ten[0];
-  if (orders.five.length > 0) {
-    // законы на 5 (любой или особые)
-    if (orders.five[0] === 'Любой') {
-      // выбран любой закон на 5
-      n === 'Любой' || n === undefined
-        ? caseAnyOrWithout10(digits, terms, orders, arrOfTerms)
-        : caseWith10(digits, terms, orders, arrOfTerms);
-    } else {
-      // особые законы на 5
-      n === 'Любой' || n === undefined
-        ? caseWith5(digits, terms, orders, arrOfTerms)
-        : caseWith10(digits, terms, orders, arrOfTerms);
+const computeFunc = {
+  'Умножение': (a: number, b: number) => a * b,
+  'Простое деление': (a: number, b: number) => a / b,
+  'Дробное деление': (a: number, b: number) => a / b,
+  'Квадрат числа': (a: number) => a ** 2,
+  'Корень квадратный': (a: number) => Math.sqrt(a),
+};
+
+export const makeExercises = (
+  digitsOne: number,
+  digitsTwo: number,
+  actions: number,
+  compute: string
+) => {
+  const { min: minA, max: maxA } = minMax(digitsOne);
+  const { min: minB, max: maxB } = minMax(digitsTwo);
+  const arrOfExc: any[] = [];
+  for (let i = 0; i < actions; i++) {
+    let excercise: number[] = [];
+    excercise.push(getRandomIntInclusive(minA, maxA));
+    if (compute !== 'Квадрат числа' && compute !== 'Корень квадратный') {
+      excercise.push(getRandomIntInclusive(minB, maxB));
     }
-  } else {
-    // без законов на 5
-    caseWith5(digits, terms, orders, arrOfTerms);
-
-    switch (n) {
-      case 'Любой':
-        // orderSrt = 'without5';
-        break;
-      case undefined:
-        // orderSrt = 'withoutAnyOrders';
-        break;
-
-      default:
-        // orderSrt = 'with10without5';
-        break;
+    if (compute === 'Простое деление') {
+      excercise = excercise.sort((a, b) => b - a);
+      while (
+        excercise[0] % excercise[1] !== 0 ||
+        excercise[0] === excercise[1]
+      ) {
+        excercise[0] = getRandomIntInclusive(minA, maxA);
+        excercise[1] = getRandomIntInclusive(minB, maxB);
+        excercise = excercise.sort((a, b) => b - a);
+      }
+    } else if (compute === 'Дробное деление') {
+      while (excercise[0] % excercise[1] === 0) {
+        excercise[0] = getRandomIntInclusive(minA, maxA);
+        excercise[1] = getRandomIntInclusive(minB, maxB);
+      }
     }
+    // считаем ответ
+    excercise.push(+computeFunc[compute](...excercise).toFixed(2));
+    arrOfExc.push(excercise);
   }
-  // считаем сумму и пушим в массив
-  arrOfTerms.push(arrOfTerms.reduce((a, b) => a + b, 0));
 
-  return arrOfTerms;
+  return arrOfExc;
 };

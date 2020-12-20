@@ -1,75 +1,69 @@
 import React, { useState } from 'react';
 import classes from './blockoneplayer.module.scss';
 import { Col } from 'react-bootstrap';
+import { StateTypeItem } from '../../state/reducer';
 import BlockGame from './blockGame/blockGame';
 import BlockResults from './blockResults/blockResults';
-import { generateNumber } from '../../../../components/exercisesLogic/generateNumber';
-
-type blockPlayOpt = {
-  numOfPlayer: number;
-  numOfRounds: number;
-  speed: number;
-  terms: number;
-  digits: number;
-  orders: any;
-  additional: {
-    soundPlay: boolean;
-    turboPlay: boolean;
-    superTurboPlay: boolean;
-  };
-};
+import { makeExercises } from '../../../../components/exercisesLogic/makeExercises';
+import cat from '../../../../resources/images/cat.gif';
 
 const BlockOnePlayer = ({
-  numOfPlayer,
-  numOfRounds,
-  digits,
-  speed,
-  terms,
-  orders,
-  additional,
-}: blockPlayOpt) => {
+  countGames,
+  firstNumber,
+  secondNumber,
+  operation,
+}: StateTypeItem) => {
   const [viewScore, setViewScore] = useState(false);
   const [round, setRound] = useState(1);
   const [results, setResults] = useState<any>({
-    numOfRounds,
+    countGames,
     rightAnswers: 0,
     roundsScore: [],
   });
 
-  const exercises: any = [];
-  generateNumber(exercises, numOfRounds, digits, terms, orders);
+  const exercises = makeExercises(
+    firstNumber,
+    secondNumber,
+    countGames,
+    operation
+  );
 
   const [newExercises, setNewExercises] = useState(exercises);
 
   return (
-    <Col className={classes.onePlayerField}>
-      {viewScore ? (
-        <BlockResults
-          results={results}
-          setResults={setResults}
-          showScore={setViewScore}
-          setExercises={setNewExercises}
-          setRound={setRound}
-          round={round}
-          exercises={exercises}
-        />
-      ) : (
-        <BlockGame
-          exercises={newExercises}
-          setNewExercises={setNewExercises}
-          numOfRounds={numOfRounds}
-          numOfPlayer={numOfPlayer}
-          timing={speed * 1000}
-          showScore={setViewScore}
-          setResults={setResults}
-          results={results}
-          additional={additional}
-          digits={digits}
-          round={round}
-          setRound={setRound}
-        />
+    <>
+      {countGames === results.rightAnswers && (
+        <Col lg={5} className="d-none d-lg-block">
+          <img src={cat} alt="cat" />
+        </Col>
       )}
-    </Col>
+
+      <Col className={classes.onePlayerField}>
+        {viewScore ? (
+          <BlockResults
+            results={results}
+            setResults={setResults}
+            showScore={setViewScore}
+            setExercises={setNewExercises}
+            setRound={setRound}
+            round={round}
+            exercises={exercises}
+          />
+        ) : (
+            <BlockGame
+              exercises={newExercises}
+              setNewExercises={setNewExercises}
+              numOfRounds={countGames}
+              showScore={setViewScore}
+              setResults={setResults}
+              results={results}
+              round={round}
+              setRound={setRound}
+              operation={operation}
+            />
+          )}
+      </Col>
+    </>
   );
 };
 

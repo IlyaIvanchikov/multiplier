@@ -7,16 +7,18 @@
       "es6",
       "dom"
     ],
-    "plugins": [{
-      "name": "typescript-tslint-plugin"
-    }],
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
     "sourceMap": true,
     "allowJs": true,
-    "jsx": "preserve",
-    "moduleResolution": "node",
+    "jsx": "react",
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
+    "moduleResolution": "node",
     "noImplicitThis": true,
     "noImplicitAny": true,
     "importHelpers": true,
@@ -29,7 +31,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "strict": true
+    "strict": true,
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": [
     "node_modules",

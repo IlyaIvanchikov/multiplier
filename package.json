@@ -1,19 +1,19 @@
 {
-  "name": "forsage",
+  "name": "multiplier",
   "version": "0.1.0",
   "private": true,
   "description": "pifagoria project",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IlyaIvanchikov/forsage.git"
+    "url": "git+https://github.com/IlyaIvanchikov/multiplier.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IlyaIvanchikov/forsage/issues"
+    "url": "https://github.com/IlyaIvanchikov/multiplier/issues"
   },
-  "homepage": "https://pifagoriyatsk.ru/forsage/",
+  "homepage": "https://pifagoriyatsk.ru/multiplier/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -28,7 +28,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^4.0.0",
     "react-select": "^3.1.0",
     "react-spring": "^8.0.27",
     "typescript": "~3.7.2"

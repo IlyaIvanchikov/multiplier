@@ -2,4 +2,9 @@
 
 .btn {
   @include btn__InModal;
+
+  &:disabled {
+    background-color: grey;
+    border: none;
+  }
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 import classes from './hint.module.scss';
 import { animated, useTransition } from 'react-spring';
-import { Animation } from './../parameters/dropdown/dropdown';
-
 interface HintProps {
   title: string;
   showHint: boolean;
+}
+
+interface Animation {
+  item: boolean;
+  key: string;
+  props: any;
 }
 
 const Hint = ({ title, showHint }: HintProps) => {

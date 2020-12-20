@@ -10,17 +10,17 @@ const Header: React.FC = () => (
     <Row className={classes.row}>
       <Col className="flex-row justify-content-start align-items-center d-none d-sm-flex">
         <div className={classes.logo}>
-          <a href="https://pifagoriyatsk.ru/forsage/">
+          <a href="https://pifagoriyatsk.ru/multiplier/">
             <img src={logo} alt="logo" />
           </a>
         </div>
       </Col>
       <Col className="flex-row justify-content-center align-items-center d-none d-md-flex">
         <img src={arrow} alt="arrow" />
-        <h1>Форсаж</h1>
+        <h1>Умножайка</h1>
       </Col>
       <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
-        <a href="https://pifagoriyatsk.ru/forsage/">
+        <a href="https://pifagoriyatsk.ru/866-2/trenajor/">
           <img className={classes.dumbbells} src={dumbbells} alt="brain" />
           К&nbsp;тренажерам
         </a>

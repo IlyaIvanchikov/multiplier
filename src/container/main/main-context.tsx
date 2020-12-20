@@ -9,16 +9,12 @@ export const ParametersContext = React.createContext<{
 });
 
 export const UsuallyContext = React.createContext<UsuallyProps>({
-  handleShowSubmit: () => {},
-  handleCountPlayersClick: () => {},
-  countPlayers: {
-    countPlayers: 1,
-    nameButton: '1 игрок',
-  },
+  handleShowSubmit: () => { },
+  setShow: () => { },
 });
 
 export const DispatchParametersContext = React.createContext<{
   dispatch: (action: ActionType) => void;
 }>({
-  dispatch: () => {},
+  dispatch: () => { },
 });
