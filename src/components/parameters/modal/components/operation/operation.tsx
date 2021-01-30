@@ -21,7 +21,6 @@ export const Operation = ({ handleButtonClick }: ButtonID) => {
               key={index}
               className={classes.btn}
               onClick={() => handleButtonClick(item)}
-              disabled={index >= 3 ? true : false}
             >
               {item}
             </Button>
