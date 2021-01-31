@@ -120,11 +120,14 @@ const BlockGame = ({
       <BlockPlayerHeader compute={operation} showScore={showScore} />
       <Row className={classes.gamefieldDisplayNumbers}>
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
+        <br/>
         <p>{exercises[round - 1][0]}</p>
         {exercises[round - 1].length > 2 && <OprationSign />}
         {exercises[round - 1].length > 2 && <p>{exercises[round - 1][1]}</p>}
+        {(operation === "Корень квадратный" || operation === "Квадрат числа") && <br/>}
       </Row>
       <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
+      {(operation === "Корень квадратный" || operation === "Квадрат числа") && <br/>}
       <Row className={classes.blockAnswer}>
         <form id="answerForm" onSubmit={handleSendAnswer}>
           <input
@@ -135,12 +138,13 @@ const BlockGame = ({
             value={answerText}
             type="number"
             ref={answerRef}
-          />
+            />
           <button type="submit">
             <img src={ArrowIcon} alt="arrow" />
           </button>
         </form>
       </Row>
+      {(operation === "Корень квадратный" || operation === "Квадрат числа") && <br/>}
       <Row className={classes.coins}>
         <span>{results.rightAnswers}</span>
         <img src={CoinsIcon} alt="coins" />
