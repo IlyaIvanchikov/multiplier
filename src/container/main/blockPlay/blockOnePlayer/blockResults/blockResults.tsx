@@ -30,14 +30,13 @@ const BlockResults = ({
 }: BlockResProps) => {
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
   const gameScorePercent = (results.rightAnswers / results.countGames) * 100;
-  let playAudio: boolean = false;
+  let playAudio = false;
   const { state } = useContext(ParametersContext);
   const { isSound } = state.gamesParameters;
 
   if (results.countGames === results.rightAnswers && isSound) {
     playAudio = true;
   }
-
   return (
     <>
       <audio src={soundVictory} autoPlay={playAudio} />
@@ -63,6 +62,7 @@ const BlockResults = ({
                     countGames: results.countGames,
                     rightAnswers: 0,
                     roundsScore: [],
+                    allTimers: []
                   });
                   setRound(1);
                   setExercises(exercises);
@@ -89,9 +89,9 @@ const BlockResults = ({
             <ProgressBar now={gameScorePercent} />
           </Col>
         </Row>
-        <Row style={{ height: '60%'}}>
+        <Row style={{ height: '60%' }}>
           <Col className={classes.tableOfResults}>
-            <TableOfPlayerResults results={results.roundsScore} />
+            <TableOfPlayerResults results={results.roundsScore} timers={results.AllTimers}/>
           </Col>
         </Row>
       </Col>

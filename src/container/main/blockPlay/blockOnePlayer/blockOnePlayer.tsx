@@ -19,6 +19,7 @@ const BlockOnePlayer = ({
     countGames,
     rightAnswers: 0,
     roundsScore: [],
+    AllTimers: [],
   });
 
   const exercises = makeExercises(
@@ -50,18 +51,19 @@ const BlockOnePlayer = ({
             exercises={exercises}
           />
         ) : (
-            <BlockGame
-              exercises={newExercises}
-              setNewExercises={setNewExercises}
-              numOfRounds={countGames}
-              showScore={setViewScore}
-              setResults={setResults}
-              results={results}
-              round={round}
-              setRound={setRound}
-              operation={operation}
-            />
-          )}
+          <BlockGame
+            exercises={newExercises}
+            setNewExercises={setNewExercises}
+            numOfRounds={countGames}
+            showScore={setViewScore}
+            setResults={setResults}
+            results={results}
+            round={round}
+            setRound={setRound}
+            operation={operation}
+            viewScore={viewScore}
+          />
+        )}
       </Col>
     </>
   );
