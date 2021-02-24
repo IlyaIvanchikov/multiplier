@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import classes from './stopWatch.module.scss';
 
 interface TimerProps {
   setTimer: React.Dispatch<React.SetStateAction<string>>;
@@ -27,18 +28,10 @@ const StopWatch = ({ setTimer, clean, viewScore }: TimerProps) => {
   }, [stopWatchSecond, stopWatchMiliSecond, setTimer, clean, viewScore]);
 
   return (
-    <div
-      style={{
-        border: '3px solid #9dbd2c',
-        width: '15%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <h1 style={{ color: '#5bc2dc', margin: '5px' }}>
+    <div className={classes.wrapper}>
+      <p className={classes.watch}>
         {stopWatchSecond}:{stopWatchMiliSecond}
-      </h1>
+      </p>
     </div>
   );
 };

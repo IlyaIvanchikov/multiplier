@@ -30,7 +30,7 @@ const BlockGame = ({
   round,
   setRound,
   operation,
-  viewScore
+  viewScore,
 }: blockGameOpt) => {
   const answerRef = useRef<HTMLInputElement | null>(null);
   const numOfTerms = exercises[0].length;

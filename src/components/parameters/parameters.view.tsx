@@ -75,14 +75,16 @@ const ParametersView = ({
         currentParametersRange={firstNumber}
         setValueRange={setValueRangeFirstNumbers}
       />
-      <FormRange
-        title="Второе число (разряд):"
-        min={1}
-        max={6}
-        step={1}
-        currentParametersRange={secondNumber}
-        setValueRange={setValueRangeSecondNumbers}
-      />
+      {operation !== 'Квадрат числа' && operation !== 'Корень квадратный' && (
+        <FormRange
+          title="Второе число (разряд):"
+          min={1}
+          max={6}
+          step={1}
+          currentParametersRange={secondNumber}
+          setValueRange={setValueRangeSecondNumbers}
+        />
+      )}
       <FormRange
         title="Количество раундов:"
         min={1}
@@ -92,10 +94,7 @@ const ParametersView = ({
         setValueRange={setValueRangeCountGames}
       />
       <Form.Group as={Row} controlId="formPlaintextButton" className="mb-1">
-        <Col
-          sm="7"
-          className="d-flex align-items-center justify-content-start"
-        >
+        <Col sm="7" className="d-flex align-items-center justify-content-start">
           <button
             title="Отключение звука"
             className={classes.buttonIcon}

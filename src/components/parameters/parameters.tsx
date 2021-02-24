@@ -26,6 +26,7 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
     operation
   );
   const [checkIsSound, setCheckIsSound] = useState<boolean>(isSound);
+
   const handleModalOperationClick = () => {
     setShowOperation(true);
   };

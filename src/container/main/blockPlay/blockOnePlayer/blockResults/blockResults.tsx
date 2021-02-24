@@ -62,7 +62,7 @@ const BlockResults = ({
                     countGames: results.countGames,
                     rightAnswers: 0,
                     roundsScore: [],
-                    allTimers: []
+                    AllTimers: [],
                   });
                   setRound(1);
                   setExercises(exercises);
@@ -91,7 +91,10 @@ const BlockResults = ({
         </Row>
         <Row style={{ height: '60%' }}>
           <Col className={classes.tableOfResults}>
-            <TableOfPlayerResults results={results.roundsScore} timers={results.AllTimers}/>
+            <TableOfPlayerResults
+              results={results.roundsScore}
+              timers={results.AllTimers}
+            />
           </Col>
         </Row>
       </Col>
