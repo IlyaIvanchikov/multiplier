@@ -1,17 +1,11 @@
 import getRandomIntInclusive from './extraFunctions/getRandomIntInclusive';
+import computeFunc from './computeFunc';
+import sqaureTerms from './squareTerms';
 
 const minMax = (digit: number) => ({
   max: Math.pow(10, digit) - 1,
   min: digit === 1 ? 2 : Math.pow(10, digit - 1),
 });
-
-const computeFunc = {
-  'Умножение': (a: number, b: number) => a * b,
-  'Простое деление': (a: number, b: number) => a / b,
-  'Дробное деление': (a: number, b: number) => a / b,
-  'Квадрат числа': (a: number) => a ** 2,
-  'Корень квадратный': (a: number) => Math.sqrt(a),
-};
 
 export const makeExercises = (
   digitsOne: number,
@@ -22,14 +16,23 @@ export const makeExercises = (
   const { min: minA, max: maxA } = minMax(digitsOne);
   const { min: minB, max: maxB } = minMax(digitsTwo);
   const arrOfExc: any[] = [];
+  // если возведение в квадрат и число одноразрядное, то наполняем пример максимально неповторяющимися числами
+  // и сразу возвращаем то, что нужно
+  if (compute === 'Квадрат числа' && digitsOne === 1) {
+    return sqaureTerms(actions);
+  }
   for (let i = 0; i < actions; i++) {
     let excercise: number[] = [];
+    // создаем первое слагаемое/множитель...
     excercise.push(getRandomIntInclusive(minA, maxA));
+    // если это не корень или квадат добавляем второе слагаемое/множитель/делитель...
     if (compute !== 'Квадрат числа' && compute !== 'Корень квадратный') {
       excercise.push(getRandomIntInclusive(minB, maxB));
     }
+    // при простом делении переставляем значения так, чтобы первое было больше, чтобы не было дробного результата
     if (compute === 'Простое деление') {
       excercise = excercise.sort((a, b) => b - a);
+      // делаем так, чтобы результат не был дробным, подбирая значения
       while (
         excercise[0] % excercise[1] !== 0 ||
         excercise[0] === excercise[1]
@@ -39,12 +42,13 @@ export const makeExercises = (
         excercise = excercise.sort((a, b) => b - a);
       }
     } else if (compute === 'Дробное деление') {
+      // делаем, чтобы результат был дробным
       while (excercise[0] % excercise[1] === 0) {
         excercise[0] = getRandomIntInclusive(minA, maxA);
         excercise[1] = getRandomIntInclusive(minB, maxB);
       }
     }
-    // считаем ответ
+    // считаем ответ округляя до сотых
     excercise.push(+computeFunc[compute](...excercise).toFixed(2));
     arrOfExc.push(excercise);
   }
