@@ -75,12 +75,13 @@ const ParametersView = ({
         currentParametersRange={firstNumber}
         setValueRange={setValueRangeFirstNumbers}
       />
-      {operation !== 'Квадрат числа' && operation !== 'Корень квадратный' && (
-        <FormRange
+      {operation !== 'Квадрат числа' &&
+        operation !== 'Корень квадратный (проф.)' &&
+        operation !== 'Корень квадратный' && (<FormRange
           title="Второе число (разряд):"
           min={1}
           max={6}
-          step={1}
+            step={1}
           currentParametersRange={secondNumber}
           setValueRange={setValueRangeSecondNumbers}
         />

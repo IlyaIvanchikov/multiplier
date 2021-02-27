@@ -9,6 +9,7 @@ const exerciseString: any = (arrOfNumbers: any, computeType: string) => {
     'Дробное деление': '/',
     'Квадрат числа': 'в квадрате',
     'Корень квадратный': 'квадратный корень',
+    'Корень квадратный (проф.)': 'квадратный корень',
   };
   const string = `${arrOfNumbers[0]} ${computeSings[computeType]} ${
     arrOfNumbers.length > 2 ? arrOfNumbers[1] : ''

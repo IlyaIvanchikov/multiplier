@@ -117,6 +117,7 @@ const BlockGame = ({
     'Дробное деление': '÷',
     'Квадрат числа': 'в квадрате',
     'Корень квадратный': 'квадратный корень',
+    'Корень квадратный (проф.)': 'квадратный корень',
   };
   const OprationSign = () => (
     <Row className={classes.operationSign}>{computeSings[operation]}</Row>
@@ -134,7 +135,10 @@ const BlockGame = ({
           operation === 'Квадрат числа') && <br />}
       </Row>
       <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
-      {(operation === 'Корень квадратный' || operation === 'Квадрат числа') && (
+      {(operation === 'Корень квадратный'
+      || operation === 'Квадрат числа'
+      || operation === 'Корень квадратный (проф.)')
+      && (
         <br />
       )}
       <Row className={classes.blockAnswer}>
@@ -157,7 +161,11 @@ const BlockGame = ({
         <br />
       )}
       <Row className={classes.coins}>
-        <StopWatch setTimer={setTimer} clean={resultOfExercise.isShow} viewScore={viewScore}/>
+        <StopWatch
+          setTimer={setTimer}
+          clean={resultOfExercise.isShow}
+          viewScore={viewScore}
+        />
         <div>
           <span>{results.rightAnswers}</span>
           <img src={CoinsIcon} alt="coins" />

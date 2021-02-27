@@ -1,6 +1,7 @@
 import getRandomIntInclusive from './extraFunctions/getRandomIntInclusive';
 import computeFunc from './computeFunc';
 import sqaureTerms from './squareTerms';
+import sqRootTerms from './sqRootFunc';
 
 const minMax = (digit: number) => ({
   max: Math.pow(10, digit) - 1,
@@ -20,13 +21,19 @@ export const makeExercises = (
   // и сразу возвращаем то, что нужно
   if (compute === 'Квадрат числа' && digitsOne === 1) {
     return sqaureTerms(actions);
+    // отдельно считаем извлечение корня в функции sqRootTerms
+  } else if (
+    compute === 'Корень квадратный (проф.)' ||
+    compute === 'Корень квадратный'
+  ) {
+    return sqRootTerms(actions, compute);
   }
   for (let i = 0; i < actions; i++) {
     let excercise: number[] = [];
     // создаем первое слагаемое/множитель...
     excercise.push(getRandomIntInclusive(minA, maxA));
     // если это не корень или квадат добавляем второе слагаемое/множитель/делитель...
-    if (compute !== 'Квадрат числа' && compute !== 'Корень квадратный') {
+    if (compute !== 'Квадрат числа') {
       excercise.push(getRandomIntInclusive(minB, maxB));
     }
     // при простом делении переставляем значения так, чтобы первое было больше, чтобы не было дробного результата

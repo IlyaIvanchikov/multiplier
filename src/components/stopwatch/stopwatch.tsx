@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import classes from './stopWatch.module.scss';
+import classes from './stopwatch.module.scss';
 
 interface TimerProps {
   setTimer: React.Dispatch<React.SetStateAction<string>>;
