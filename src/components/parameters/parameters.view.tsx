@@ -67,14 +67,15 @@ const ParametersView = ({
         {' '}
         <Operation handleButtonClick={setValueSelectOperation} />
       </ModalComponent>
-      <FormRange
+      { operation !== 'Корень квадратный (проф.)' &&
+        operation !== 'Корень квадратный' && (<FormRange
         title="Первое число (разряд):"
         min={1}
         max={6}
         step={1}
         currentParametersRange={firstNumber}
         setValueRange={setValueRangeFirstNumbers}
-      />
+      />)}
       {operation !== 'Квадрат числа' &&
         operation !== 'Корень квадратный (проф.)' &&
         operation !== 'Корень квадратный' && (<FormRange
