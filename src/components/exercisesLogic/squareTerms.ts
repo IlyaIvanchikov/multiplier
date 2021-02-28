@@ -1,4 +1,3 @@
-import computeFunc from './computeFunc';
 import shuffle from './extraFunctions/shuffleArr';
 
 const sqaureTerms = (actions: number) => {
@@ -26,7 +25,7 @@ const sqaureTerms = (actions: number) => {
   for (let i = 0; i < actions; i++) {
     let term: number;
     term = terms[i];
-    const result = +computeFunc['Квадрат числа'](term);
+    const result = term ** 2;
     arrOfExc.push([term, result]);
   }
   return arrOfExc;
