@@ -43,7 +43,7 @@ const BlockGame = ({
     isShow: false,
   });
   const isFloatResult =
-    operation === 'Дробное деление' || operation === 'Квадрат числа'
+    operation === 'Дробное деление' || operation === 'Корень квадратный (проф.)'
       ? true
       : false;
 
