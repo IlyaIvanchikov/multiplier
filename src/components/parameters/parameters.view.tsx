@@ -36,6 +36,7 @@ const ParametersView = ({
   setValueSelectOperation,
   handleSubmit,
 }: EventHandlerProps) => {
+  const minRange = operation === 'Корень квадратный' ? 2 : 1;
   return (
     <Form
       className={classes.form}
@@ -67,26 +68,26 @@ const ParametersView = ({
         {' '}
         <Operation handleButtonClick={setValueSelectOperation} />
       </ModalComponent>
-      { operation !== 'Корень квадратный (проф.)' &&
-        operation !== 'Корень квадратный' && (<FormRange
+      <FormRange
         title="Первое число (разряд):"
-        min={1}
+        min={minRange}
         max={6}
         step={1}
         currentParametersRange={firstNumber}
         setValueRange={setValueRangeFirstNumbers}
-      />)}
+      />
       {operation !== 'Квадрат числа' &&
         operation !== 'Корень квадратный (проф.)' &&
-        operation !== 'Корень квадратный' && (<FormRange
-          title="Второе число (разряд):"
-          min={1}
-          max={6}
+        operation !== 'Корень квадратный' && (
+          <FormRange
+            title="Второе число (разряд):"
+            min={1}
+            max={6}
             step={1}
-          currentParametersRange={secondNumber}
-          setValueRange={setValueRangeSecondNumbers}
-        />
-      )}
+            currentParametersRange={secondNumber}
+            setValueRange={setValueRangeSecondNumbers}
+          />
+        )}
       <FormRange
         title="Количество раундов:"
         min={1}
@@ -116,16 +117,7 @@ const ParametersView = ({
           sm="5"
           className="d-flex align-items-center justify-content-center"
         >
-          <Button
-            type="submit"
-            className={classes.formControlButton}
-            style={{
-              width: '100%',
-              height: '70%',
-              minHeight: '40px',
-              marginBottom: '2%',
-            }}
-          >
+          <Button type="submit" className={classes.formControlButton}>
             Начать
           </Button>
         </Col>
