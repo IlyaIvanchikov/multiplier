@@ -1,23 +1,34 @@
 import getRandomIntInclusive from './extraFunctions/getRandomIntInclusive';
 
-const sqRootTerms = (actions: number, operation: string) => {
+const minMax = (digit: number) => ({
+  max: Math.pow(10, digit) - 1,
+  min: digit === 1 ? 2 : Math.pow(10, digit - 1),
+});
+
+const sqRootTerms = (actions: number, operation: string, digits: number) => {
+  const { min, max } = minMax(digits);
   const arrOfExc: any[] = [];
+
   for (let i = 0; i < actions; i++) {
-    let term, result;
-    if (operation !== 'Корень квадратный (проф.)') {
-      result = getRandomIntInclusive(2, 100);
-      term = result ** 2;
-    } else {
-      do {
-        term = getRandomIntInclusive(2, 100000);
+    let term = getRandomIntInclusive(min, max);
+    let result = Math.sqrt(term);
+    if (operation === 'Корень квадратный (проф.)') {
+      // tslint:disable-next-line: no-bitwise
+      while ((result ^ 0) === result) {
+        term = getRandomIntInclusive(min, max);
         result = Math.sqrt(term);
-        // tslint:disable-next-line: no-bitwise
-      } while ((result ^ 0) === result);
-      result = result.toFixed(2);
+      }
+    } else {
+      // tslint:disable-next-line: no-bitwise
+      while ((result ^ 0) !== result) {
+        term = getRandomIntInclusive(min, max);
+        result = Math.sqrt(term);
+      }
     }
-    arrOfExc.push([term, result]);
+
+    arrOfExc.push([term, +result.toFixed(2)]);
   }
-  return arrOfExc;
+  return arrOfExc.sort(() => Math.random() - 0.5);
 };
 
 export default sqRootTerms;

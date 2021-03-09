@@ -26,7 +26,7 @@ export const makeExercises = (
     compute === 'Корень квадратный (проф.)' ||
     compute === 'Корень квадратный'
   ) {
-    return sqRootTerms(actions, compute);
+    return sqRootTerms(actions, compute, digitsOne);
   }
   for (let i = 0; i < actions; i++) {
     let excercise: number[] = [];
