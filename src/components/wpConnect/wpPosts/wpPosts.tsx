@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loader from '../../loader/loader';
 import classes from './wpPosts.module.scss';
+import AuthForm from '../wpAuth/AuthForm'
+
 const wpSiteUrl = 'https://sattvalife.ru';
 
 const getWpPosts = (url: string) => {
@@ -29,6 +31,7 @@ const Posts: React.FC = ({ posts }: any) => {
           </a>
         </h1>
       </div>
+      <AuthForm /><br />
       {posts.map((post) => (
         <div
           key={post.id}
