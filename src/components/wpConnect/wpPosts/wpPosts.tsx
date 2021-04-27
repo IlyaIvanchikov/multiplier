@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loader from '../../loader/loader';
 import classes from './wpPosts.module.scss';
+const wpSiteUrl = 'https://sattvalife.ru';
 
-const getWpPosts = () => {
-  const wpSiteUrl = 'https://sattvalife.ru';
+const getWpPosts = (url: string) => {
   return new Promise<any[]>((resolve: any) => {
     axios
-      .get(`${wpSiteUrl}/wp-json/wp/v2/posts`)
+      .get(`${url}/wp-json/wp/v2/posts`)
       .then((res) => {
         resolve(res.data);
       })
@@ -21,6 +21,14 @@ const Posts: React.FC = ({ posts }: any) => {
   console.log(posts);
   return (
     <div className={`mt-5 post-container`}>
+      <div style={{ color: 'black' }}>
+        <h1>
+          Это посты с сайта{' '}
+          <a target="_blank" href={wpSiteUrl}>
+            {wpSiteUrl}
+          </a>
+        </h1>
+      </div>
       {posts.map((post) => (
         <div
           key={post.id}
@@ -28,7 +36,7 @@ const Posts: React.FC = ({ posts }: any) => {
           style={{ width: '50rem', color: 'black' }}
         >
           <div className="card-header">{post.title.rendered}</div>
-          <div className="card-body">{(post.content.rendered)}</div>
+          <div className="card-body">{post.content.rendered}</div>
         </div>
       ))}
     </div>
@@ -42,7 +50,7 @@ const WpPosts: React.FC = () => {
 
   useEffect(() => {
     if (!posts.length) {
-      getWpPosts().then((data) => {
+      getWpPosts(wpSiteUrl).then((data) => {
         setPosts(data);
         setLoading(false);
       });
