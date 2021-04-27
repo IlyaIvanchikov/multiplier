@@ -1,18 +1,79 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 
-const wpAuthentication = (event) => {
-  event.preventDefault();
-  console.log('auth');
-};
+const AuthForm = ({ siteUrl }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [token, setToken] = useState('');
+  const [isLogged, setIsLogged] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-const AuthForm = () => {
+  if (token && !localStorage.getItem('token')) {
+    localStorage.setItem('token', token);
+    setIsLogged(true);
+  } else if (localStorage.getItem('token')) {
+    axios
+      .get(`${siteUrl}//wp-json/wp/v2/users/1`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setIsLogged(true);
+        };
+        console.log(res);
+      })
+      .then(() => setLoading(false))
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        localStorage.removeItem('token');
+        console.log('rem');
+      });
+  } else {
+    if (loading) setLoading(false);
+  }
+
+  const wpAuthentication = (event) => {
+    event.preventDefault();
+    const loginData = { username, password };
+    axios
+      .post(`${siteUrl}/wp-json/jwt-auth/v1/token`, loginData)
+      .then((res) => {
+        if (res.data.token) {
+          console.log(res.data);
+          setToken(res.data.token);
+        }
+      })
+      .catch((err) => {
+        console.warn(err);
+        alert('Wrong password or username');
+      });
+  };
+
   return (
     <div>
-      <form onSubmit={wpAuthentication}>
-        <input type="text" placeholder="username" />
-        <input type="password" placeholder="password" />
-        <input type="submit" value="Auth" />
-      </form>
+      {!loading && !isLogged && (
+        <form onSubmit={wpAuthentication}>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="username"
+            required={true}
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
+            required={true}
+          />
+          <input type="submit" value="Auth" />
+        </form>
+      )}
     </div>
   );
 };

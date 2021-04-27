@@ -31,7 +31,7 @@ const Posts: React.FC = ({ posts }: any) => {
           </a>
         </h1>
       </div>
-      <AuthForm /><br />
+      <AuthForm siteUrl={wpSiteUrl} /><br />
       {posts.map((post) => (
         <div
           key={post.id}
