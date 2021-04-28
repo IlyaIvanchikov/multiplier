@@ -20,7 +20,6 @@ const getWpPosts = (url: string) => {
 };
 
 const Posts: React.FC = ({ posts }: any) => {
-  console.log(posts);
   return (
     <div className={`mt-5 post-container`}>
       <div style={{ color: 'black' }}>

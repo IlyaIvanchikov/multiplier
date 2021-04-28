@@ -14,7 +14,7 @@ const AuthForm = ({ siteUrl }) => {
     setIsLogged(true);
   } else if (localStorage.getItem('token')) {
     axios
-      .get(`${siteUrl}//wp-json/wp/v2/users/1`, {
+      .get(`${siteUrl}/wp-json/wp/v2/users/me?context=edit`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -22,15 +22,14 @@ const AuthForm = ({ siteUrl }) => {
       .then((res) => {
         if (res.status === 200) {
           setIsLogged(true);
-        };
-        console.log(res);
+        }
+        localStorage.setItem('user', `${username} ${res.data.id}`);
       })
       .then(() => setLoading(false))
       .catch((err) => {
-        console.error(err);
-        setLoading(false);
+        console.warn(err);
         localStorage.removeItem('token');
-        console.log('rem');
+        setLoading(false);
       });
   } else {
     if (loading) setLoading(false);
