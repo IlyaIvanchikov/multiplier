@@ -1,5 +1,6 @@
 export interface StateType {
   gamesParameters: StateTypeItem;
+  localParameters: StateTypeItemLocal;
 }
 
 export interface StateTypeItem {
@@ -10,10 +11,17 @@ export interface StateTypeItem {
   isSound: boolean;
 }
 
-export type ActionType = {
-  type: 'CREATE_PARAMETERS';
-  gamesParameters: StateTypeItem;
-};
+export interface StateTypeItemLocal {
+  token: string;
+  name?: string;
+}
+
+export type ActionType =
+  | {
+      type: 'CREATE_PARAMETERS';
+      gamesParameters: StateTypeItem;
+    }
+  | { type: 'CREATE_LOCAL_DATA'; localParameters: StateTypeItemLocal };
 
 export const initialState: StateType = {
   gamesParameters: {
@@ -23,12 +31,20 @@ export const initialState: StateType = {
     operation: 'Умножение',
     isSound: false,
   },
+  localParameters: {
+    token: '',
+    name: '',
+  },
 };
 
 export const reducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
     case 'CREATE_PARAMETERS': {
       state.gamesParameters = action.gamesParameters;
+      return state;
+    }
+    case 'CREATE_LOCAL_DATA': {
+      state.localParameters = action.localParameters;
       return state;
     }
     default:
