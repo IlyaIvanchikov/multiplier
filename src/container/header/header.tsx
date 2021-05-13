@@ -35,7 +35,7 @@ const Header = ({ name }: EventHeaderProps) => {
           <h1>Умножайка</h1>
         </Col>
         <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
-          <h3>Добро пожаловать{name && `: ${name}`} 21312432432sdfsfsfsfsfsd4</h3>
+          <h3>Добро пожаловать, {name || 'странник'}</h3>
           {name && logoutComponent}
         </Col>
       </Row>

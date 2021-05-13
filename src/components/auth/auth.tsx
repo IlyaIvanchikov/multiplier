@@ -32,6 +32,7 @@ const Auth = ({ setAuth, setName }: HandleParamsAuth) => {
       .then((res) => {
         if (res.data.token) {
           const { token } = res.data;
+          localStorage.setItem('token', token);
           // setName(user_display_name);
           dispatch({
             type: 'CREATE_LOCAL_DATA',
@@ -45,22 +46,23 @@ const Auth = ({ setAuth, setName }: HandleParamsAuth) => {
       })
       .then((token: string) => {
         console.log(token);
-        axios.get(`${URL}/wp-json/wp/v2/users/me?context=edit`, {
-          headers: {
-            authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcGlmYWdvcml5YXRzay5ydSIsImlhdCI6MTYyMDg0OTU2OCwibmJmIjoxNjIwODQ5NTY4LCJleHAiOjE2MjE0NTQzNjgsImRhdGEiOnsidXNlciI6eyJpZCI6IjkzIn19fQ.n3HOYCaMduSac-kpFivseM8UDyunadRArtwQrPpgQqg`,
-          },
-        })
-          .then((resp) => {
-            localStorage.setItem('token', token);
-            console.log(resp);
+        axios
+          .get(`${URL}/wp-json/wp/v2/users/me?context=edit`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           })
-        // .then((res) => {
-        //   if (res.status === 200) {
-        //     setIsLogged(true);
-        //     localStorage.setItem('user', `${res.data.id} ${res.data.id}`);
-        //     console.log(res.data);
-        //   }
-        // })
+          // .then((resp) => {
+          //   console.log(resp.data);
+          // })
+          .then((res) => {
+            if (res.status === 200) {
+              setAuth(true);
+              setName(`${res.data.first_name} ${res.data.last_name}`);
+              localStorage.setItem('user', `${res.data.id} ${res.data.name}`);
+              console.log(res.data);
+            }
+          });
       })
       .catch((err) => {
         dispatch({
