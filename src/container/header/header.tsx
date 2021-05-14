@@ -5,15 +5,20 @@ import logo from '../../resources/images/header/logo.svg';
 import arrow from '../../resources/images/header/arrow.svg';
 import logout from '../../resources/images/header/logout.svg';
 
-interface EventHeaderProps {
-  name: string;
+interface HandleParamsAuth {
+  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  setErrorAuth: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header = ({ name }: EventHeaderProps) => {
+const Header = ({ setAuth, setErrorAuth }: HandleParamsAuth) => {
 
   const handleExit = () => {
     localStorage.clear();
+    setErrorAuth(false);
+    setAuth(false);
   }
+
+  const name = localStorage.getItem('name') || 'друг!';
 
   const logoutComponent =
     (<div className={classes.logo} onClick={handleExit}>
@@ -35,8 +40,8 @@ const Header = ({ name }: EventHeaderProps) => {
           <h1>Умножайка</h1>
         </Col>
         <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
-          <h3>Добро пожаловать, {name || 'странник'}</h3>
-          {name && logoutComponent}
+          <h3>Добро пожаловать, {name}</h3>
+          {name !== 'друг!' && logoutComponent}
         </Col>
       </Row>
     </Container>

@@ -2,9 +2,9 @@ import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import classes from './auth.module.scss';
 import owl from '../../resources/images/main/owl.png';
 import ModalComponent from '../parameters/modal/modal';
-import { reducer, initialState } from '../../container/main/state/reducer';
+// import { reducer, initialState } from '../../container/main/state/reducer';
 
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface HandleParamsSubmit {
@@ -13,19 +13,34 @@ interface HandleParamsSubmit {
 
 interface HandleParamsAuth {
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  setName: React.Dispatch<React.SetStateAction<string>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setErrorAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  errorAuth: boolean;
+  isLoading: boolean;
 }
 
-const Auth = ({ setAuth, setName }: HandleParamsAuth) => {
+const Auth = ({
+  setAuth,
+  setIsLoading,
+  setErrorAuth,
+  errorAuth,
+  isLoading,
+}: HandleParamsAuth) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  // const [state, dispatch] = useReducer(reducer, initialState);
   const URL = 'https://pifagoriyatsk.ru';
+
+  useEffect(() => {
+    if (errorAuth && isLoading === false) {
+      setShowModal(true);
+    }
+  }, [errorAuth, isLoading]);
 
   const handleSubmit = ({ event }: HandleParamsSubmit) => {
     event.preventDefault();
+    setIsLoading(true);
     const loginData = { username, password };
     axios
       .post(`${URL}/wp-json/jwt-auth/v1/token`, loginData)
@@ -33,47 +48,43 @@ const Auth = ({ setAuth, setName }: HandleParamsAuth) => {
         if (res.data.token) {
           const { token } = res.data;
           localStorage.setItem('token', token);
-          // setName(user_display_name);
-          dispatch({
-            type: 'CREATE_LOCAL_DATA',
-            localParameters: {
-              token,
-            },
-          });
+          /// НЕ УДАЛЯТЬ
+          // dispatch({
+          //   type: 'CREATE_LOCAL_DATA',
+          //   localParameters: {
+          //     token,
+          //   },
+          // });
           return token;
-          // setAuth(true);
         }
       })
       .then((token: string) => {
-        console.log(token);
         axios
           .get(`${URL}/wp-json/wp/v2/users/me?context=edit`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
-          // .then((resp) => {
-          //   console.log(resp.data);
-          // })
           .then((res) => {
-            if (res.status === 200) {
-              setAuth(true);
-              setName(`${res.data.first_name} ${res.data.last_name}`);
-              localStorage.setItem('user', `${res.data.id} ${res.data.name}`);
-              console.log(res.data);
-            }
+            const { first_name } = res.data;
+            localStorage.setItem('name', first_name);
+            setIsLoading(false);
+            setAuth(true);
           });
       })
       .catch((err) => {
-        dispatch({
-          type: 'CREATE_LOCAL_DATA',
-          localParameters: {
-            token: '',
-            name: '',
-          },
-        });
-        setName('');
-        setShowModal(true);
+        console.log('test');
+        /// НЕ УДАЛЯТЬ!
+        // dispatch({
+        //   type: 'CREATE_LOCAL_DATA',
+        //   localParameters: {
+        //     token: '',
+        //     name: '',
+        //   },
+        // });
+        localStorage.clear();
+        setErrorAuth(true);
+        setIsLoading(false);
       });
   };
 

@@ -15,7 +15,12 @@
       background-color: white;
       border: $orangeColor solid 4px;
       border-radius: 25px;
+      cursor: pointer;
 
+      &:hover {
+        opacity: 0.7;
+      }
+      
       img {
         height: 75px;
         padding: 10px;
