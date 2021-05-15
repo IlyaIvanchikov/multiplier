@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ParametersView from './parameters.view';
 import { SubmitForm } from '../../ts/store';
 import { StateTypeItem } from '../../container/main/state/reducer';
@@ -13,11 +13,21 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
   }: StateTypeItem = gamesParameters;
   const [showOperation, setShowOperation] = useState<boolean>(false);
 
-  const [valueRangeCountGames, setValueRangeCountGames] = useState<number>(countGames);
-  const [valueRangeFirstNumbers, setValueRangeFirstNumbers] = useState<number>(firstNumber);
-  const [valueRangeSecondNumber, setValueRangeSecondNumbers] = useState<number>(secondNumber);
-  const [valueSelectOperation, setValueSelectOperation] = useState<string>(operation);
+  const [valueRangeCountGames, setValueRangeCountGames] = useState<number>(
+    countGames
+  );
+  const [valueRangeFirstNumbers, setValueRangeFirstNumbers] = useState<number>(
+    firstNumber
+  );
+  const [valueRangeSecondNumber, setValueRangeSecondNumbers] = useState<number>(
+    secondNumber
+  );
+
+  const [valueSelectOperation, setValueSelectOperation] = useState<string>(
+    operation
+  );
   const [checkIsSound, setCheckIsSound] = useState<boolean>(isSound);
+
   const handleModalOperationClick = () => {
     setShowOperation(true);
   };
@@ -26,6 +36,14 @@ const Parameters = ({ handleSubmit, gamesParameters }: SubmitForm) => {
   const handleChooseModalOperationClick = () => {
     setShowOperation(false);
   };
+
+  useEffect(() => {
+    if (valueSelectOperation === 'Корень квадратный') {
+      setValueRangeFirstNumbers(2);
+    } else {
+      setValueRangeFirstNumbers(1);
+    }
+  }, [valueSelectOperation]);
 
   return (
     <ParametersView

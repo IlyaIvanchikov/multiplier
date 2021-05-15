@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import classes from './loader.module.scss';
 
-const Loader: React.FC = () => {
+export interface StandardComponentProps {
+  state: string;
+}
+
+const Loader = ({ state }: StandardComponentProps) => {
   const [counter, setCounter] = useState<number>(3);
 
-  useEffect(() => {
-    counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
-  }, [counter]);
+  // useEffect(() => {
+  //   counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
+  // }, [counter]);
 
   return (
     <div className="d-flex align-items-center justify-content-center flex-column">
@@ -14,7 +18,7 @@ const Loader: React.FC = () => {
         className="text-center"
         style={{ color: 'black', marginBottom: '15px' }}
       >
-        Загрузка: {counter}
+        {state === 'axios' ? 'Авторизация...' : `Загрузка: ${counter}`}
       </h2>
       <div className={classes.loader}>
         <div className={classes.loader__uno} />

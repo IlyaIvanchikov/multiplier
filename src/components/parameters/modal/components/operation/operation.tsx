@@ -9,6 +9,7 @@ const nameButton: string[] = [
   'Дробное деление',
   'Квадрат числа',
   'Корень квадратный',
+  'Корень квадратный (проф.)',
 ];
 
 export const Operation = ({ handleButtonClick }: ButtonID) => {
@@ -21,7 +22,6 @@ export const Operation = ({ handleButtonClick }: ButtonID) => {
               key={index}
               className={classes.btn}
               onClick={() => handleButtonClick(item)}
-              disabled={index >= 3 ? true : false}
             >
               {item}
             </Button>

@@ -36,6 +36,7 @@ const ParametersView = ({
   setValueSelectOperation,
   handleSubmit,
 }: EventHandlerProps) => {
+  const minRange = operation === 'Корень квадратный' ? 2 : 1;
   return (
     <Form
       className={classes.form}
@@ -69,20 +70,24 @@ const ParametersView = ({
       </ModalComponent>
       <FormRange
         title="Первое число (разряд):"
-        min={1}
+        min={minRange}
         max={6}
         step={1}
         currentParametersRange={firstNumber}
         setValueRange={setValueRangeFirstNumbers}
       />
-      <FormRange
-        title="Второе число (разряд):"
-        min={1}
-        max={6}
-        step={1}
-        currentParametersRange={secondNumber}
-        setValueRange={setValueRangeSecondNumbers}
-      />
+      {operation !== 'Квадрат числа' &&
+        operation !== 'Корень квадратный (проф.)' &&
+        operation !== 'Корень квадратный' && (
+          <FormRange
+            title="Второе число (разряд):"
+            min={1}
+            max={6}
+            step={1}
+            currentParametersRange={secondNumber}
+            setValueRange={setValueRangeSecondNumbers}
+          />
+        )}
       <FormRange
         title="Количество раундов:"
         min={1}
@@ -92,10 +97,7 @@ const ParametersView = ({
         setValueRange={setValueRangeCountGames}
       />
       <Form.Group as={Row} controlId="formPlaintextButton" className="mb-1">
-        <Col
-          sm="7"
-          className="d-flex align-items-center justify-content-start"
-        >
+        <Col sm="7" className="d-flex align-items-center justify-content-start">
           <button
             title="Отключение звука"
             className={classes.buttonIcon}
@@ -115,16 +117,7 @@ const ParametersView = ({
           sm="5"
           className="d-flex align-items-center justify-content-center"
         >
-          <Button
-            type="submit"
-            className={classes.formControlButton}
-            style={{
-              width: '100%',
-              height: '70%',
-              minHeight: '40px',
-              marginBottom: '2%',
-            }}
-          >
+          <Button type="submit" className={classes.formControlButton}>
             Начать
           </Button>
         </Col>

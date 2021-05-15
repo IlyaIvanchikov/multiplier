@@ -13,6 +13,7 @@ type blockGameHeaderOpt = {
 
 const BlockPlayerHeader = ({ compute, showScore }: blockGameHeaderOpt) => {
   const { setShow }: UsuallyProps = useContext(UsuallyContext);
+  if (compute === 'Корень квадратный (проф.)') compute = 'Корень квадратный'
   return (
     <Row className={classes.playerHeader}>
       <Col className={classes.threePoints}>
