@@ -44,7 +44,7 @@ const Header = ({ setAuth, setErrorAuth }: HandleParamsAuth) => {
           <h1 title="Тренажер по ментальной арифметике Умножайка">Умножайка</h1>
         </Col>
         <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
-          <h3>Добро пожаловать, {name}</h3>
+          <h3 className={classes.header__greetings}>Добро пожаловать, {name}</h3>
           {name !== 'друг!' && logoutComponent}
         </Col>
       </Row>
