@@ -4,16 +4,24 @@ import { Row, Col } from 'react-bootstrap';
 import dumbbells from '../../resources/images/header/dumbbells.svg';
 
 const socialLinks: string[][] = [
-  ['instagram', 'https://www.instagram.com/pifagoriya_tomsk/'],
-  ['vkontakte', 'https://vk.com/pifagoriya'],
-  ['youtube', 'https://www.youtube.com/channel/UCbK2Y-37z11NpkRHIDasHwA/'],
+  ['Наш Instagram', 'https://www.instagram.com/pifagoriya_tomsk/'],
+  ['Группа vkontakte', 'https://vk.com/pifagoriya'],
+  [
+    'Наш канал на youtube',
+    'https://www.youtube.com/channel/UCbK2Y-37z11NpkRHIDasHwA/',
+  ],
 ];
 
 const Footer: React.FC = () => (
   <footer className={classes.footer}>
     <Row>
       <Col className={classes.footer__socialIcons}>
-        <a target="_blank" rel="noopener noreferrer" href={socialLinks[0][1]}>
+        <a
+          title={socialLinks[0][0]}
+          target="_blank"
+          rel="noopener noreferrer"
+          href={socialLinks[0][1]}
+        >
           <svg
             className={classes.footer__icon}
             viewBox="0 0 511 511.9"
@@ -24,7 +32,12 @@ const Footer: React.FC = () => (
             <path d="m423.851562 119.300781c0 16.953125-13.746093 30.699219-30.703124 30.699219-16.953126 0-30.699219-13.746094-30.699219-30.699219 0-16.957031 13.746093-30.699219 30.699219-30.699219 16.957031 0 30.703124 13.742188 30.703124 30.699219zm0 0" />
           </svg>
         </a>
-        <a target="_blank" rel="noopener noreferrer" href={socialLinks[2][1]}>
+        <a
+          title={socialLinks[2][0]}
+          target="_blank"
+          rel="noopener noreferrer"
+          href={socialLinks[2][1]}
+        >
           <svg
             className={classes.footer__icon}
             viewBox="0 0 24 24"
@@ -33,7 +46,12 @@ const Footer: React.FC = () => (
             <path d="m23.469 5.929.03.196c-.29-1.029-1.073-1.823-2.068-2.112l-.021-.005c-1.871-.508-9.4-.508-9.4-.508s-7.51-.01-9.4.508c-1.014.294-1.798 1.088-2.083 2.096l-.005.021c-.699 3.651-.704 8.038.031 11.947l-.031-.198c.29 1.029 1.073 1.823 2.068 2.112l.021.005c1.869.509 9.4.509 9.4.509s7.509 0 9.4-.509c1.015-.294 1.799-1.088 2.084-2.096l.005-.021c.318-1.698.5-3.652.5-5.648 0-.073 0-.147-.001-.221.001-.068.001-.149.001-.23 0-1.997-.182-3.951-.531-5.846zm-13.861 9.722v-7.293l6.266 3.652z" />
           </svg>
         </a>
-        <a target="_blank" rel="noopener noreferrer" href={socialLinks[1][1]}>
+        <a
+          title={socialLinks[1][0]}
+          target="_blank"
+          rel="noopener noreferrer"
+          href={socialLinks[1][1]}
+        >
           <svg
             className={classes.footer__icon}
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +74,10 @@ const Footer: React.FC = () => (
             />
           </svg>
         </a>
-        <a href="https://pifagoriyatsk.ru/866-2/trenajor/">
+        <a
+          title="Все наши тренажеры"
+          href="https://pifagoriyatsk.ru/866-2/trenajor/"
+        >
           <img className={classes.footer__icon} src={dumbbells} alt="brain" />
         </a>
       </Col>
