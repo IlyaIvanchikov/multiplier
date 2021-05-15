@@ -34,7 +34,9 @@ const Auth = ({
 
   useEffect(() => {
     if (errorAuth && isLoading === false) {
-      setShowModal(true);
+      setTimeout(() => {
+        setShowModal(true);
+      }, 1000);
     }
   }, [errorAuth, isLoading]);
 
@@ -73,7 +75,6 @@ const Auth = ({
           });
       })
       .catch((err) => {
-        console.log('test');
         /// НЕ УДАЛЯТЬ!
         // dispatch({
         //   type: 'CREATE_LOCAL_DATA',
