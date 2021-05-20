@@ -5,6 +5,9 @@ import logo from '../../resources/images/header/logo.svg';
 import arrow from '../../resources/images/header/arrow.svg';
 import logout from '../../resources/images/header/logout.svg';
 
+const DEFAULT_NAME = 'дорогой друг';
+const GREETINGS = 'Здравствуй, ';
+
 interface HandleParamsAuth {
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
   setErrorAuth: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,12 +15,13 @@ interface HandleParamsAuth {
 
 const Header = ({ setAuth, setErrorAuth }: HandleParamsAuth) => {
   const handleExit = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
     setErrorAuth(false);
     setAuth(false);
   };
 
-  const name = localStorage.getItem('name') || 'друг!';
+  const name = localStorage.getItem('name') || DEFAULT_NAME;
 
   const logoutComponent = (
     <div className={classes.logo} onClick={handleExit}>
@@ -30,7 +34,7 @@ const Header = ({ setAuth, setErrorAuth }: HandleParamsAuth) => {
       <Row className={classes.row}>
         <Col className="flex-row justify-content-start align-items-center d-none d-md-flex">
           <div className={classes.logo}>
-            <a href="https://pifagoriyatsk.ru/multiplier/">
+            <a href="/">
               <img
                 src={logo}
                 title="Центр развития интеллекта Пифагория"
@@ -44,8 +48,8 @@ const Header = ({ setAuth, setErrorAuth }: HandleParamsAuth) => {
           <h1 title="Тренажер по ментальной арифметике Умножайка">Умножайка</h1>
         </Col>
         <Col className="d-flex flex-row justify-content-sm-end align-items-center justify-content-center">
-          <h3 className={classes.header__greetings}>Добро пожаловать, {name}</h3>
-          {name !== 'друг!' && logoutComponent}
+          <h3 className={classes.header__greetings}>{GREETINGS + name}!</h3>
+          {name !== DEFAULT_NAME && logoutComponent}
         </Col>
       </Row>
     </Container>
