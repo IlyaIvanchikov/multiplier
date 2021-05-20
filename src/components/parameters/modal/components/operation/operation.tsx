@@ -9,6 +9,7 @@ const nameButton: string[] = [
   'Дробное деление',
   'Квадрат числа',
   'Корень квадратный',
+  'Корень квадратный (проф.)',
 ];
 
 export const Operation = ({ handleButtonClick }: ButtonID) => {

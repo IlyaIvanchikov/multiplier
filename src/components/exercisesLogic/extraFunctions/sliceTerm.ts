@@ -1,6 +1,6 @@
 const sliceTerm = (term: number, digits: number) => {
-  let rezTerm = term.toString(),
-    plus = 1;
+  let rezTerm = term.toString();
+  let plus = 1;
   if (term < 0) {
     rezTerm = rezTerm.slice(1);
     plus = -1;

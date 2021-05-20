@@ -32,3 +32,16 @@
   fill: #fff;
   background-color: $orangeColor;
 }
+
+// костыль
+@media (max-width: 430px) {
+  .footer__copyrights {
+    display: none;
+  }
+
+  .footer__socialIcons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+

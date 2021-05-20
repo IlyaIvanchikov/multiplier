@@ -9,6 +9,7 @@ const exerciseString: any = (arrOfNumbers: any, computeType: string) => {
     'Дробное деление': '/',
     'Квадрат числа': 'в квадрате',
     'Корень квадратный': 'квадратный корень',
+    'Корень квадратный (проф.)': 'квадратный корень',
   };
   const string = `${arrOfNumbers[0]} ${computeSings[computeType]} ${
     arrOfNumbers.length > 2 ? arrOfNumbers[1] : ''
@@ -20,7 +21,7 @@ const exerciseString: any = (arrOfNumbers: any, computeType: string) => {
 const OneRowOfTable = (props: any) => {
   const { state } = useContext(ParametersContext);
   const { operation } = state.gamesParameters;
-  const { exercises, number } = props;
+  const { exercises, number, timer } = props;
   const { exercise, answer } = exercises;
   const rightAnswer = exercise[exercise.length - 1];
   const isRightAnswer = () => (answer === rightAnswer ? true : false);
@@ -36,6 +37,7 @@ const OneRowOfTable = (props: any) => {
           <span>&#10008; {answer}</span>
         )}
       </td>
+      <td>{timer}</td>
       <td>{rightAnswer}</td>
     </tr>
   );

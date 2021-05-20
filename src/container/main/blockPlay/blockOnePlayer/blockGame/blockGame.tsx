@@ -6,6 +6,7 @@ import BlockAnswerIndicate from './blockAnswerIndicate';
 import { Row } from 'react-bootstrap';
 import CoinsIcon from '../../../../../resources/images/Coins.png';
 import ArrowIcon from '../../../../../resources/images/Arrow.png';
+import StopWatch from '../../../../../components/stopwatch/stopwatch';
 
 type blockGameOpt = {
   exercises: any[];
@@ -17,6 +18,7 @@ type blockGameOpt = {
   round: number;
   setRound: any;
   operation: string;
+  viewScore: boolean;
 };
 
 const BlockGame = ({
@@ -28,19 +30,20 @@ const BlockGame = ({
   round,
   setRound,
   operation,
+  viewScore,
 }: blockGameOpt) => {
   const answerRef = useRef<HTMLInputElement | null>(null);
   const numOfTerms = exercises[0].length;
   const [answerText, setAnswerText] = useState('');
+  const [timer, setTimer] = useState('0');
   let rez: any;
   const [resultOfExercise, setResultOfExercise] = useState({
     isRightAnswer: true,
     isRoundComplete: false,
     isShow: false,
   });
-
   const isFloatResult =
-    operation === 'Дробное деление' || operation === 'Квадрат числа'
+    operation === 'Дробное деление' || operation === 'Корень квадратный (проф.)'
       ? true
       : false;
 
@@ -49,6 +52,7 @@ const BlockGame = ({
   };
 
   const handleSendAnswer = (event: any) => {
+    /// остановить таймер
     rez = results;
     event.preventDefault();
 
@@ -60,9 +64,11 @@ const BlockGame = ({
 
     if (!rez.roundsScore[round - 1]) {
       rez.roundsScore.push({ exercise: exercises[round - 1], answer: 0 });
+      rez.AllTimers.push(timer);
     }
     if (round < numOfRounds) {
       rez.roundsScore[round - 1].answer = +answerText;
+
       setResultOfExercise({
         isRightAnswer,
         isRoundComplete: false,
@@ -106,11 +112,12 @@ const BlockGame = ({
     }
   });
   const computeSings = {
-    'Умножение': 'x',
+    Умножение: 'x',
     'Простое деление': '÷',
     'Дробное деление': '÷',
     'Квадрат числа': 'в квадрате',
     'Корень квадратный': 'квадратный корень',
+    'Корень квадратный (проф.)': 'квадратный корень',
   };
   const OprationSign = () => (
     <Row className={classes.operationSign}>{computeSings[operation]}</Row>
@@ -120,11 +127,20 @@ const BlockGame = ({
       <BlockPlayerHeader compute={operation} showScore={showScore} />
       <Row className={classes.gamefieldDisplayNumbers}>
         <BlockAnswerIndicate resultOfExercise={resultOfExercise} />
+        <br />
         <p>{exercises[round - 1][0]}</p>
         {exercises[round - 1].length > 2 && <OprationSign />}
         {exercises[round - 1].length > 2 && <p>{exercises[round - 1][1]}</p>}
+        {(operation === 'Корень квадратный' ||
+          operation === 'Квадрат числа') && <br />}
       </Row>
       <Row className={classes.gameCounter}>{`${round}/${numOfRounds}`}</Row>
+      {(operation === 'Корень квадратный'
+      || operation === 'Квадрат числа'
+      || operation === 'Корень квадратный (проф.)')
+      && (
+        <br />
+      )}
       <Row className={classes.blockAnswer}>
         <form id="answerForm" onSubmit={handleSendAnswer}>
           <input
@@ -141,9 +157,19 @@ const BlockGame = ({
           </button>
         </form>
       </Row>
+      {(operation === 'Корень квадратный' || operation === 'Квадрат числа') && (
+        <br />
+      )}
       <Row className={classes.coins}>
-        <span>{results.rightAnswers}</span>
-        <img src={CoinsIcon} alt="coins" />
+        <StopWatch
+          setTimer={setTimer}
+          clean={resultOfExercise.isShow}
+          viewScore={viewScore}
+        />
+        <div>
+          <span>{results.rightAnswers}</span>
+          <img src={CoinsIcon} alt="coins" />
+        </div>
       </Row>
     </>
   );
