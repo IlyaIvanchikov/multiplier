@@ -6,8 +6,10 @@ import Auth from './components/auth/auth';
 import React, { useState } from 'react';
 import Loader from './components/loader/loader';
 
+const isLocked = true; // переключатель авторизации. Закрыто или открыто
+
 const App = () => {
-  const [auth, setAuth] = useState<boolean>(false);
+  const [auth, setAuth] = useState<boolean>(!isLocked);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorAuth, setErrorAuth] = useState<boolean>(false);
   const token = localStorage.getItem('token');
