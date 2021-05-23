@@ -8,9 +8,9 @@ export interface StandardComponentProps {
 const Loader = ({ state }: StandardComponentProps) => {
   const [counter, setCounter] = useState<number>(3);
 
-  // useEffect(() => {
-  //   counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
-  // }, [counter]);
+  useEffect(() => {
+    counter > 1 && setTimeout(() => setCounter(counter - 1), 1000);
+  }, [counter]);
 
   return (
     <div className="d-flex align-items-center justify-content-center flex-column">
